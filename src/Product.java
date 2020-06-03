@@ -15,7 +15,7 @@ public class Product {
     }
 
     public int compareTo(Product otherProduct){
-        return this.name.compareTo(otherProduct.name);
+        return this.name.compareToIgnoreCase(otherProduct.name);
     }
 
 }
