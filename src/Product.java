@@ -14,5 +14,8 @@ public class Product {
         this.counted = counted;
     }
 
+    public int compareTo(Product otherProduct){
+        return this.name.compareTo(otherProduct.name);
+    }
 
 }
