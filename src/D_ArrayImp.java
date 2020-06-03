@@ -102,14 +102,19 @@ public class D_ArrayImp<T extends Comparable<T>> {
 
     //eliminación del último elemento
   	/**
-  	 * Deletes the last element of the array
+  	 * Removes the last element in the array and returns it
+     * @throws Exception if the array is empty
+     * @return last element in the array
   	 */
-    public void pop() {
-        if (this.len > 0) {
-            len--;
-            array[len] = null;
-            verRDown();
+      public T pop() throws Exception{
+        if (this.len == 0) {
+            throw new Exception("Array is empty");
         } 
+        len--;
+        T lastElem = array[len];
+        array[len] = null;
+        verRDown();
+        return lastElem;
     }
 
     //actualización
@@ -247,14 +252,12 @@ public class D_ArrayImp<T extends Comparable<T>> {
   	 * Returns a sorted copy of the original array (doesn't modify the original array)
      * @return sorted copy of the original array
   	 */
-  	public T[] sorted(){
-        @SuppressWarnings("unchecked")
-        final T[] a = (T[]) new Comparable[capacity];
-        T[] copy = a;
+  	public D_ArrayImp<T> sorted(){
+        D_ArrayImp<T> copy = new D_ArrayImp<>(len);
         for(int i=0;i<this.len;i++) {
-            copy[i] = array[i];
+            copy.add(array[i]);
         }
-        randomizedQuickSort(a, 0, this.len-1);
+        copy.sort();
         return copy;
     }
 	
