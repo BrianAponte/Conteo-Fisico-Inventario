@@ -36,13 +36,13 @@ public class AVLTreeImp<T extends Comparable<T>>{
             if(posParent.data.compareTo(data)==1) {
                 posParent.leftChild = newNode;
                 newNode.parent = posParent;
-                increaseHeight(newNode);
+                updateHeights(root);
                 balance(posParent);
             }
             else if(posParent.data.compareTo(data)==-1) {
                 posParent.rightChild = newNode;
                 newNode.parent = posParent;
-                increaseHeight(newNode);
+                updateHeights(root);
                 balance(posParent);
             }
         }
@@ -78,10 +78,24 @@ public class AVLTreeImp<T extends Comparable<T>>{
         return currentNode;
     }
 
-    private void increaseHeight(AVLNode node) {
-        while(node.parent!=null) {
-            node.parent.height ++;
-            node = node.parent;
+    private void updateHeights(AVLNode node) {
+        if(node.leftChild==null) {
+            if(node.rightChild ==null) {
+                node.height=1;
+            }
+            else {
+                updateHeights(node.rightChild);
+                node.height = node.rightChild.height+1;
+            }
+        }
+        else if(node.rightChild ==null) {
+            updateHeights(node.leftChild);
+            node.height = node.leftChild.height+1;
+        }
+        else {
+            updateHeights(node.leftChild);
+            updateHeights(node.rightChild); 
+            node.height = Math.max(node.leftChild.height, node.rightChild.height)+1;
         }
     }
 
@@ -103,8 +117,6 @@ public class AVLTreeImp<T extends Comparable<T>>{
             int balanceFactor = calcBalanceFactor(nodeFrom);
             if(balanceFactor>1) {
                 String bCase = getCase(nodeFrom);
-                //System.out.println("Unbalanced node: "+nodeFrom.data+" case: "+bCase);
-                //if(nodeFrom.parent==null) {System.out.println("Root is unbalanced");}
                 switch (bCase){
                     case "LL":
                         rightRotation(nodeFrom.leftChild);
@@ -122,6 +134,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                         break;
                 }
                 balanced = true;
+                updateHeights(root);
             }
             nodeFrom = nodeFrom.parent;
         }
@@ -207,5 +220,106 @@ public class AVLTreeImp<T extends Comparable<T>>{
         if(current.parent== null) {return current.data.compareTo(node.data)==1?current:null;}
 
         return current.parent;
+    }
+
+    public void delete(AVLNode node) {
+       //Simplest case is if the node is a leaf
+       if(node.height==1) {
+           //If it is we just set to null what points to it and reduce height if needed
+           if(node.parent == null) {
+               root = null;
+           }
+           else {
+               if(node.parent.data.compareTo(node.data)==1) {
+                   node.parent.leftChild = null;
+                   updateHeights(root);
+               }
+               else {
+                   node.parent.rightChild = null;
+                   updateHeights(root);
+               }
+           }
+       }
+       else {
+           //If it's not there's two options
+           if(node.rightChild==null) {
+               //If the node has no right child we simply promote it's left child,
+               //reduce height and call balance to make sure we don't unbalance the tree
+               if(node.parent!=null){
+                    node.leftChild.parent = node.parent;
+                    if(node.parent.data.compareTo(node.data)==1) {
+                        node.parent.leftChild = node.leftChild;
+                        
+                    }
+                    else {
+                        node.parent.rightChild = node.leftChild;
+                    }
+                    updateHeights(root);
+                    balance(node.parent);
+               }
+               else {
+                   node.leftChild.parent = null;
+                   root = node.leftChild;
+               }
+           }
+           else {
+                //If a right child exists it means we can swap it with the next biggest element
+                AVLNode next = next(node);
+                //As it is the next element it has no left child, so we can update that pointer right away
+                next.leftChild = node.leftChild;
+                if(node.leftChild!=null) {
+                    node.leftChild.parent = next;
+                }
+                //If node next happens to be the right child of our node things are simple
+                if(node.rightChild.equals(next)) {
+                    next.parent = node.parent;
+                    if(node.parent.data.compareTo(node.data)==1) {
+                        node.parent.leftChild = next;
+                    
+                    }
+                    else {
+                        node.parent.rightChild = next;
+                    }
+                    updateHeights(root);
+                    balance(next);
+                } else {
+                    //If it's not we have to consider it having a right child
+                    AVLNode possUnbalanced = next.parent;
+                    if(next.rightChild!=null) {
+                        next.parent.leftChild = next.rightChild;
+                        next.rightChild.parent = next.parent;
+                    }
+                    else {
+                        next.parent.leftChild = null;
+                        if(next.parent.parent.equals(node)) {
+                            possUnbalanced = next;
+                        }
+                        else {
+                            possUnbalanced = next.parent.parent;
+                        }
+                    }
+                    if(node.parent.data.compareTo(node.data)==1) {
+                        node.parent.leftChild = next;
+                    }
+                    else {
+                        node.parent.rightChild = next;
+                    }
+                    next.leftChild = node.leftChild;
+                    next.rightChild = node.rightChild;
+                    updateHeights(root);
+                    balance(possUnbalanced);
+                }       
+           }
+       }
+    }
+
+    public D_ArrayImp<T> rangeSearch(T rangeStart, T rangeEnd) {
+        D_ArrayImp<T> arr = new D_ArrayImp<>();
+        AVLNode next = next(find(rangeStart));
+        while(next.data.compareTo(rangeEnd)!=1) {
+            arr.add(next.data);
+            next = next(next);
+        }
+        return arr;
     }
 }
