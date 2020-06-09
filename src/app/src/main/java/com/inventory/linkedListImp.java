@@ -1,3 +1,5 @@
+package com.inventory;
+
 import java.util.Random;
 
 /**
@@ -360,7 +362,7 @@ public class linkedListImp<E> {
   	/**
   	 * Retorna una copia ordenada de la lista, no modifica la original.
   	 */
-  	private LinkedListImp<E> sorted(){
+  	/*private LinkedListImp<E> sorted(){
       LinkedListImp<E> copy = new LinkedListImp();
       Node current = this.head;
       while (current !=null) {
@@ -370,7 +372,7 @@ public class linkedListImp<E> {
       copy.sort();
       return copy;
     }
-
+    */
     //O(n)
   	/**
   	 * Busca el elemento key en la lista
@@ -441,9 +443,9 @@ public class linkedListImp<E> {
         ll.pushLast(110);
         System.out.println(ll.inList(106));
         System.out.println("done 1");
-        System.out.println(ll.deleteByKey(106));
+        //System.out.println(ll.deleteByKey(106));
         System.out.println("done 2");
-        System.out.println(ll.changeByKey(110, 111));
+        //System.out.println(ll.changeByKey(110, 111));
         System.out.println("done 3");
     }
 }

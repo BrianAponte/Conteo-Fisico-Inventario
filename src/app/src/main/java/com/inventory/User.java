@@ -1,3 +1,5 @@
+package com.inventory;
+
 public class User {
 
     int id;

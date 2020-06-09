@@ -1,3 +1,5 @@
+package com.inventory;
+
 import java.util.Arrays;
 
 /**
@@ -203,9 +205,9 @@ public class dArrayImp<E> {
   	/**
   	 * Retorna una copia ordenada del arreglo, no modifica el original.
   	 */
-  	public dArrayImp<E> sorted(){
+  	//public dArrayImp<E> sorted(){
 
-    }
+    //}
 
   	/**
   	 * re-inicia el arreglo dejándolo vacío.
