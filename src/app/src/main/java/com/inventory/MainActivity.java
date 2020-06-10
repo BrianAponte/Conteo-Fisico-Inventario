@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) {
         // Do something in response to button
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.UserId);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
