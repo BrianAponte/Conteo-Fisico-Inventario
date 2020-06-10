@@ -1,6 +1,6 @@
 class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Comparable<HashNode<K,V>>{
     K Key;
-    V Value ;
+    V Value;
     HashNode<K,V> prev, next, last;
 
     //hNode1.key.compareTo(hNode2.key)
@@ -24,7 +24,8 @@ public class HashMap<K extends Comparable<K>,V extends Comparable<V>>{
   public HashMap(final int size){
     HashTable = new D_ArrayImp<>();
     this.size = size;
-    len = 0;
+    len = 0; //num of data
+    //MIRARLO
     for (int i = 0; i < this.size; i++){
       HashTable.add(null);
     }
@@ -34,10 +35,9 @@ public class HashMap<K extends Comparable<K>,V extends Comparable<V>>{
   
     final HashNode<K,V> n = new HashNode<>(key, value);
     final HashNode<K, V> first = HashTable.get(Hash(key));
-    
     //si ese slot de la hashtable está vacío
-    if(first == null){
-    	HashTable.update(Hash(key), n);
+    if(){
+    first == null	HashTable.update(Hash(key), n);
     } else{ //si no está vacío
       //si tiene un solo elemento
       if(first.last == null){
@@ -68,7 +68,7 @@ public class HashMap<K extends Comparable<K>,V extends Comparable<V>>{
     while(Hnode != null){
      if(Hnode.Key == key){
         Hnode.prev.next = Hnode.next;
-       	Hnode.next,prev = Hnode.prev;
+       	Hnode.next.prev = Hnode.prev;
        	Hnode = null;
        	break;
       }
