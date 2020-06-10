@@ -1,10 +1,10 @@
 /**
  * Self Balancing binary tree
  * @author slondonoq
- * @param <T> the type of the elements in the tree
+ * @param <T> the type of the elements in the tree (must implement Comparable)
  */
 public class AVLTreeImp<T extends Comparable<T>>{
-    public class AVLNode{
+    private class AVLNode{
         T data;
         AVLNode parent;
         AVLNode leftChild;
@@ -20,12 +20,18 @@ public class AVLTreeImp<T extends Comparable<T>>{
         }
     }
 
-    public AVLNode root;
-
+    private AVLNode root;
+    /**
+     * Initializes an AVL tree of the type specified inside the 
+     * diamond brackets (must implement Comparable<T>) 
+     */
     public AVLTreeImp() {
         root = null;
     }
-
+    /**
+     * Adds an object to the tree
+     * @param data data to be added
+     */
     public void insert(T data) {
         AVLNode newNode = new AVLNode(data);
         if(root==null) {
@@ -36,18 +42,34 @@ public class AVLTreeImp<T extends Comparable<T>>{
             if(posParent.data.compareTo(data)==1) {
                 posParent.leftChild = newNode;
                 newNode.parent = posParent;
-                updateHeights(root);
+                if(data.compareTo(root.data)==1) {
+                    updateRHeight();
+                }
+                else {
+                    updateLHeight();
+                }
                 balance(posParent);
             }
             else if(posParent.data.compareTo(data)==-1) {
                 posParent.rightChild = newNode;
                 newNode.parent = posParent;
-                updateHeights(root);
+                if(data.compareTo(root.data)==1) {
+                    updateRHeight();
+                }
+                else {
+                    updateLHeight();
+                }
                 balance(posParent);
             }
         }
     }
-
+    /**
+     * Looks for a specified element in the tree, if it's not in it
+     * returns the node that would be it's parent.
+     * @param data item to look for
+     * @return node that either contains the specified element or would be the 
+     * parent of that node
+     */
     public AVLNode find(T data) {
         if(root==null) {
             return root;
@@ -99,7 +121,29 @@ public class AVLTreeImp<T extends Comparable<T>>{
         }
     }
 
+    private void updateLHeight() {
+        updateHeights(root.leftChild);
+        if(root.rightChild==null) {
+            root.height = root.leftChild.height+1;
+        }
+        else {
+            root.height = Math.max(root.rightChild.height, root.leftChild.height)+1;
+        }
+    }
+
+    private void updateRHeight() {
+        updateHeights(root.rightChild);
+        if(root.leftChild==null) {
+            root.height = root.rightChild.height+1;
+        }
+        else {
+            root.height = Math.max(root.rightChild.height, root.leftChild.height)+1;
+        }
+    }
+
     private int calcBalanceFactor(AVLNode node) {
+        if(node.height==1) {return 0;}
+
         if(node.leftChild!=null&&node.rightChild!=null) {
             return Math.abs(node.rightChild.height-node.leftChild.height);
         }
@@ -201,7 +245,12 @@ public class AVLTreeImp<T extends Comparable<T>>{
         }
         pivot.leftChild.parent = pivot;
     }
-
+    /**
+     * Returns the node that cointains the next element greater than the one that the node
+     * passed as parameter has.
+     * @param node Node used to look for the next greater element
+     * @return Node with the next greater element
+     */
     public AVLNode next(AVLNode node) {
         if(node.rightChild!=null) {
             node = node.rightChild;
@@ -221,23 +270,35 @@ public class AVLTreeImp<T extends Comparable<T>>{
 
         return current.parent;
     }
-
+    /**
+     * Removes a node from the tree
+     * @param node Node to be removed
+     */
     public void delete(AVLNode node) {
+        //First checking if the node is in the tree
+        if(find(node.data).data.compareTo(node.data)!=0) {return;}
+
        //Simplest case is if the node is a leaf
        if(node.height==1) {
            //If it is we just set to null what points to it and reduce height if needed
-           if(node.parent == null) {
-               root = null;
-           }
-           else {
-               if(node.parent.data.compareTo(node.data)==1) {
+            if(node.parent == null) {
+                root = null;
+            }
+            else {
+                if(node.parent.data.compareTo(node.data)==1) {
                    node.parent.leftChild = null;
-                   updateHeights(root);
-               }
-               else {
-                   node.parent.rightChild = null;
-                   updateHeights(root);
-               }
+                }
+                else {
+                    node.parent.rightChild = null;
+                }
+
+                if(node.data.compareTo(root.data)==1) {
+                    updateRHeight();
+                }
+                else{
+                    updateLHeight();
+                }
+                balance(node.parent);
            }
        }
        else {
@@ -254,7 +315,13 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     else {
                         node.parent.rightChild = node.leftChild;
                     }
-                    updateHeights(root);
+
+                    if(node.data.compareTo(root.data)==1) {
+                        updateRHeight();
+                    }
+                    else{
+                        updateLHeight();
+                    }
                     balance(node.parent);
                }
                else {
@@ -271,17 +338,28 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     node.leftChild.parent = next;
                 }
                 //If node next happens to be the right child of our node things are simple
-                if(node.rightChild.equals(next)) {
+                if(node.rightChild.data.compareTo(next.data)==0) {
                     next.parent = node.parent;
-                    if(node.parent.data.compareTo(node.data)==1) {
-                        node.parent.leftChild = next;
-                    
+                    if(node.parent != null) {
+                        if(node.parent.data.compareTo(node.data)==1) {
+                            node.parent.leftChild = next;
+                        
+                        }
+                        else {
+                            node.parent.rightChild = next;
+                        }
+
+                        if(node.data.compareTo(root.data)==-1) {
+                            updateLHeight();
+                        }
+                        else{
+                            updateRHeight();
+                        }
+                        balance(next);
                     }
                     else {
-                        node.parent.rightChild = next;
+                        root = next;
                     }
-                    updateHeights(root);
-                    balance(next);
                 } else {
                     //If it's not we have to consider it having a right child
                     AVLNode possUnbalanced = next.parent;
@@ -291,28 +369,45 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     }
                     else {
                         next.parent.leftChild = null;
-                        if(next.parent.parent.equals(node)) {
+                        if(next.parent.parent.data.compareTo(node.data)==0) {
                             possUnbalanced = next;
                         }
                         else {
                             possUnbalanced = next.parent.parent;
                         }
                     }
-                    if(node.parent.data.compareTo(node.data)==1) {
-                        node.parent.leftChild = next;
+                    next.rightChild = node.rightChild;
+                    next.parent = node.parent;
+                    if(node.parent!=null) {
+                        if(node.parent.data.compareTo(node.data)==1) {
+                            node.parent.leftChild = next;
+                        }
+                        else {
+                            node.parent.rightChild = next;
+                        }
                     }
                     else {
-                        node.parent.rightChild = next;
+                        root = next;
                     }
-                    next.leftChild = node.leftChild;
-                    next.rightChild = node.rightChild;
-                    updateHeights(root);
+                    
+
+                    if(node.data.compareTo(root.data)==-1) {
+                        updateLHeight();
+                    }
+                    else{
+                        updateRHeight();
+                    }
                     balance(possUnbalanced);
                 }       
            }
        }
     }
-
+    /**
+     * Returns a D_ArrayImp (dynamic array) with all the data that's between a specified range
+     * @param rangeStart Start of the range
+     * @param rangeEnd End of the range
+     * @return Dynamic array with those elements
+     */
     public D_ArrayImp<T> rangeSearch(T rangeStart, T rangeEnd) {
         D_ArrayImp<T> arr = new D_ArrayImp<>();
         AVLNode next = next(find(rangeStart));
@@ -321,5 +416,22 @@ public class AVLTreeImp<T extends Comparable<T>>{
             next = next(next);
         }
         return arr;
+    }
+    /**
+     * Returns a D_ArrayImp (dynamic array) with the In-Order traversal of the tree
+     * @return dynamic array with the traversal
+     */
+    public D_ArrayImp<T> getInOrder() {
+        D_ArrayImp<T> arr = new D_ArrayImp<>();
+        inOrderT(root, arr);
+        return arr;
+    }
+
+    private void inOrderT(AVLNode node, D_ArrayImp<T> arr) {
+        if(node!=null) {
+            inOrderT(node.leftChild, arr);
+            arr.add(node.data);
+            inOrderT(node.rightChild, arr);
+        }
     }
 }
