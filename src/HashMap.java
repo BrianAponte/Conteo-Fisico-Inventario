@@ -28,13 +28,16 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
 
   public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
 
-    public D_ArrayImp<linkedListImp<HashNode<K, V>>> HashTable;
-    private int capacity, len;
+    protected D_ArrayImp<linkedListImp<HashNode<K, V>>> HashTable;
+    protected int capacity, len;
 
     public HashMap(int size) {
       HashTable = new D_ArrayImp<>(size);
       this.capacity = size;
       len = 0; // num of data
+      for(int i = 0;i<size;i++){
+        HashTable.add(new linkedListImp<HashNode<K,V>>());
+      }
     }
 
 /// Methods
@@ -196,11 +199,7 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
  public static void main(String []args){
    System.out.println("Hola");
    HashMap<Integer, String> myHash = new HashMap<>(10);
-   linkedListImp<HashNode<Integer, String>> lldeprueba = myHash.HashTable.get(9);
-   Node<HashNode<Integer, String>> xy = lldeprueba.head;
-   System.out.println();
-   System.out.println(myHash.getLen());
-   System.out.println(myHash.getCapacity());
-   
+   myHash.add(10, "Carlos");
+   System.out.println(myHash.find(10));
  }
 }

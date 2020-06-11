@@ -1,4 +1,5 @@
 import java.util.Random;
+
 /**
  * Resizable array with built-in sorting method
  * @param <T> the type of the elements in the array
@@ -140,7 +141,7 @@ public class D_ArrayImp<T extends Comparable<T>> {
      */
     public T get(final int index) throws IndexOutOfBoundsException {
         if (index >= capacity || index < 0) {
-            throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + len);
+            throw new IndexOutOfBoundsException("Index " + index + "out of bounds for length " + capacity);
         }
 
         return array[index];
