@@ -27,16 +27,17 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
   }
 
   public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
-    private final D_ArrayImp<linkedListImp<HashNode<K, V>>> HashTable;
+
+    public D_ArrayImp<linkedListImp<HashNode<K, V>>> HashTable;
     private int capacity, len;
 
-    public HashMap(final int size) {
+    public HashMap(int size) {
       HashTable = new D_ArrayImp<>(size);
       this.capacity = size;
       len = 0; // num of data
     }
 
-
+/// Methods
     /**
      * Returns the Table actual capacity.
      * @param None
@@ -61,6 +62,7 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
      *
      */
     public void add(final K key, final V value) {
+
       /*
        *Se hace la segunda verificación porque en caso de que la tabla se haya llenado
        *perfectamente, el mismo d_array ya haría un r_Up, por lo que se haría 2 veces
@@ -71,17 +73,17 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
       }
 
       //m es el hashnode que se piensa añadir
-      final HashNode<K, V> m = new HashNode<>(key, value);
+      HashNode<K, V> m = new HashNode<>(key, value);
       /*
        *n es el Node de tipo Hashnode(hace uso de m)
        *que se puede añadir a la linked list,
        *ya que la ll recibe Node, no HNode
       */
-      final Node<HashNode<K,V>> n = new Node<>(m);
+      Node<HashNode<K,V>> n = new Node<>(m);
       /*
        *Acceso a la HashTable en donde indica la función hash
       */
-      final linkedListImp<HashNode<K,V>> lista = HashTable.get(hash(key));
+      linkedListImp<HashNode<K,V>> lista = this.HashTable.get(hash(key));
       
       // si ese slot de la hashtable está vacío
       if (lista.isEmpty()) {
@@ -102,12 +104,12 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
      * @return Value
      * 
      */
-    public V find(final K key) {
+    public V get(final K key) {
 
       /*
        *Acceso a la HashTable en donde indica la función hash
       */
-      final linkedListImp<HashNode<K,V>> lista = HashTable.get(hash(key));
+      linkedListImp<HashNode<K,V>> lista = this.HashTable.get(hash(key));
       Node<HashNode<K,V>> searcher = lista.head;
 
       while (searcher != null) {
@@ -125,7 +127,7 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
      * @return Boolean
      * 
      */
-    public boolean get(final K key) {
+    public boolean find(final K key) {
 
       /*
        *Acceso a la HashTable en donde indica la función hash
@@ -164,7 +166,8 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
     }
 
     /**
-     * Type Getter 4 K, if int returns 0, if String returns 1.
+     * Type Getter 4 K, if int returns 0, if String returns 1
+     * Protected cuz' no other class needs access to it.
      * @param key
      * @return 0,1
      */
@@ -178,7 +181,7 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
     }
 
     //hashea integers o String verificando el datatype
-    protected int hash(final K key) {
+    public int hash(final K key) {
       if(getType(key) == 0){
         //HashInt
         return ((25 * Integer.parseInt(key.toString()) + 102) % 552493) % this.capacity;
@@ -188,5 +191,16 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
       return 0;
     }
 
-  
+ /// 
+
+ public static void main(String []args){
+   System.out.println("Hola");
+   HashMap<Integer, String> myHash = new HashMap<>(10);
+   linkedListImp<HashNode<Integer, String>> lldeprueba = myHash.HashTable.get(9);
+   Node<HashNode<Integer, String>> xy = lldeprueba.head;
+   System.out.println();
+   System.out.println(myHash.getLen());
+   System.out.println(myHash.getCapacity());
+   
+ }
 }
