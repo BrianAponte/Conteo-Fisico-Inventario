@@ -1,83 +1,192 @@
 class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Comparable<HashNode<K,V>>{
-    K Key;
-    V Value;
+    private final K Key;
+    private final V Value;
 
-    //hNode1.key.compareTo(hNode2.key)
-    public int compareTo(HashNode<K, V> hNode) {
-        if(this.Key.compareTo(hNode.Key) == 0){
-            // 0 ==, -1 a<b, 1 a.ct(b) a>b
-        }
+    // hNode1.key.compareTo(hNode2.key)
+    public int compareTo(final HashNode<K, V> hNode) {
+      if (this.Key.compareTo(hNode.Key) == 0) {
+        // 0 ==, -1 a<b, 1 a.ct(b) a>b
         return 0;
+      }
+      if (this.Key.compareTo(hNode.Key) == -1) {
+        return -1;
+      }
+      if (this.Key.compareTo(hNode.Key) == 1) {
+        return 1;
+      }
+      return 0;
     }
 
-    public HashNode(final K key, final V value){
+    public HashNode(final K key, final V value) {
       this.Key = key;
       this.Value = value;
     }
+
+    public K getKey(){return Key;}
+    public V getValue(){return Value;}
   }
 
-public class HashMap<K extends Comparable<K>,V extends Comparable<V>>{
-  public D_ArrayImp<HashNode<K, V>> HashTable;
-  int size, len;
-  
-  public HashMap(final int size){
-    HashTable = new D_ArrayImp<>(size);
-    this.size = size;
-    len = 0; //num of data
-  }
-  
-  public void add(final K key, final V value){
-  
-    final HashNode<K,V> n = new HashNode<>(key, value);
-    final HashNode<K, V> first = HashTable.get(Hash(key));
-    //si ese slot de la hashtable está vacío
-    if(first == null	){
-      HashTable.update(Hash(key), n);
-    } else{ //si no está vacío
-      //si tiene un solo elemento
-      if(first.last == null){
-        first.next = n;
-        first.next.prev = first;
-        first.last = n;
-      } else{ //si tiene más de un elemento
-        first.last.next = n;
-        first.last.next.prev = first.last;
-        first.last = n;
+  public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
+    private final D_ArrayImp<linkedListImp<HashNode<K, V>>> HashTable;
+    private int capacity, len;
+
+    public HashMap(final int size) {
+      HashTable = new D_ArrayImp<>(size);
+      this.capacity = size;
+      len = 0; // num of data
+    }
+
+
+    /**
+     * Returns the Table actual capacity.
+     * @param None
+     * @return Capacity.
+     */
+    public int getCapacity()
+    {return this.capacity;}
+
+    /**
+     * Returns the number of elements.
+     * @param None
+     * @return Number of elements.
+     */
+    public int getLen()
+    {return this.len;}
+
+    /**
+     * Adds an element into the HashTable. 
+     * @param key
+     * @param value
+     * @return void
+     *
+     */
+    public void add(final K key, final V value) {
+      /*
+       *Se hace la segunda verificación porque en caso de que la tabla se haya llenado
+       *perfectamente, el mismo d_array ya haría un r_Up, por lo que se haría 2 veces
+      */
+      if(this.capacity == this.len && this.len != HashTable.getSize()){
+        HashTable.rUp();
+        this.capacity = HashTable.getSize();
       }
+
+      //m es el hashnode que se piensa añadir
+      final HashNode<K, V> m = new HashNode<>(key, value);
+      /*
+       *n es el Node de tipo Hashnode(hace uso de m)
+       *que se puede añadir a la linked list,
+       *ya que la ll recibe Node, no HNode
+      */
+      final Node<HashNode<K,V>> n = new Node<>(m);
+      /*
+       *Acceso a la HashTable en donde indica la función hash
+      */
+      final linkedListImp<HashNode<K,V>> lista = HashTable.get(hash(key));
+      
+      // si ese slot de la hashtable está vacío
+      if (lista.isEmpty()) {
+        //entra a la HashTable en la posición que le indica el hash
+        //al entrar encuenta una linked list, y accede al head
+        //al cual le pasa un Node de tipo HashNode de tipo K,V
+        lista.head = n;
+      } else { // si no está vacío
+        lista.pushLast(m);
+      }
+      this.len++;
     }
     
-  }
-  
-  public V find(final K key){
-    HashNode<K, V> Hnode = HashTable.get(Hash(key));
-    while(Hnode != null){
-     if(Hnode.Key == key){
-        return Hnode.Value;
-      }
-      Hnode = Hnode.next; 
-    }
-  }
-  
-  public void remove(final K key){
-    HashNode<K, V> Hnode = HashTable.get(Hash(key));
-    while(Hnode != null){
-     if(Hnode.Key == key){
-        Hnode.prev.next = Hnode.next;
-       	Hnode.next.prev = Hnode.prev;
-       	Hnode = null;
-       	break;
-      }
-      Hnode = Hnode.next; 
-    }
     
-  }
-  
-  public int hashInt(K key){
-    return 0;
-  }
-  
-  public String hashString(K key){
-    return "";
-  }
+    /**
+     * Looks for an element, if found returns its value if not, returns null.
+     * @param key
+     * @return Value
+     * 
+     */
+    public V find(final K key) {
+
+      /*
+       *Acceso a la HashTable en donde indica la función hash
+      */
+      final linkedListImp<HashNode<K,V>> lista = HashTable.get(hash(key));
+      Node<HashNode<K,V>> searcher = lista.head;
+
+      while (searcher != null) {
+        if (searcher.key.getKey() == key) {
+          return searcher.key.getValue();
+        }
+        searcher = searcher.next;
+      }
+      return null;
+    }
+
+    /**
+     * Looks for an element, if found returns true, otherwise returns false.
+     * @param key
+     * @return Boolean
+     * 
+     */
+    public boolean get(final K key) {
+
+      /*
+       *Acceso a la HashTable en donde indica la función hash
+      */
+      final linkedListImp<HashNode<K,V>> lista = HashTable.get(hash(key));
+      Node<HashNode<K,V>> searcher = lista.head;
+
+      while (searcher != null) {
+        if (searcher.key.getKey() == key) {
+          return true;
+        }
+        searcher = searcher.next;
+      }
+      return false;
+    }
+
+    /**
+     * Removes an element from the list.
+     * @param key
+     * @return void
+     */
+    public void remove(final K key) {
+      /*
+       *Acceso a la HashTable en donde indica la función hash
+      */
+      final linkedListImp<HashNode<K,V>> lista = HashTable.get(hash(key));
+      Node<HashNode<K,V>> searcher = lista.head;
+
+      while (searcher != null) {
+        if (searcher.key.getKey() == key) {
+          lista.delete(searcher.key);
+        }
+        searcher = searcher.next;
+      }
+
+    }
+
+    /**
+     * Type Getter 4 K, if int returns 0, if String returns 1.
+     * @param key
+     * @return 0,1
+     */
+    protected byte getType(K key){
+      try{
+        Integer.parseInt(key.toString());
+        return 0;
+      }catch(Exception e){
+        return 1;
+      }
+    }
+
+    //hashea integers o String verificando el datatype
+    protected int hash(final K key) {
+      if(getType(key) == 0){
+        //HashInt
+        return ((25 * Integer.parseInt(key.toString()) + 102) % 552493) % this.capacity;
+      } 
+      //HashString
+      
+      return 0;
+    }
+
   
 }
