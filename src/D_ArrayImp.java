@@ -47,6 +47,7 @@ public class D_ArrayImp<T extends Comparable<T>> {
         capacity *= 2;
     }
 
+
     /**
      * Decreases the array's capacity by half
      */
@@ -138,7 +139,7 @@ public class D_ArrayImp<T extends Comparable<T>> {
      * @throws IndexOutOfBoundsException if index is out of range
      */
     public T get(final int index) throws IndexOutOfBoundsException {
-        if (index >= len || index < 0) {
+        if (index >= capacity || index < 0) {
             throw new IndexOutOfBoundsException("Index " + index + " out of bounds for length " + len);
         }
 
@@ -334,4 +335,10 @@ public class D_ArrayImp<T extends Comparable<T>> {
   	 */
     public boolean isEmpty() {return len == 0;}
 
+    public static void main(String args[]){
+        D_ArrayImp<Integer> my_darray = new D_ArrayImp<>(10);
+        my_darray.add(10);
+
+        System.out.println(my_darray.get(9));
+    }
 }
