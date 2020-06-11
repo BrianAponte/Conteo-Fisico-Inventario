@@ -199,10 +199,12 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
 
     // O(n)
     /**
-     * cambia el elemento oldKey por newKey.
+     * cambia el elemento oldKey por newKey,
+     * si no existe retorna null.
      * 
-     * @Param oldKey
-     * @Param newKey
+     * @param oldKey
+     * @param newKey
+     * @return oldKey, null.
      */
     public E change(final E oldKey, final E newKey) {
         Node<E> n = head;
@@ -213,8 +215,8 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
             }
             n = n.next;
         }
-        final Node<E> k = new Node<>((E) "No Such Element in list");
-        return k.key;
+
+        return null;
     }
 
     // O(n)
@@ -383,7 +385,7 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
      * Retorna una copia ordenada de la lista, no modifica la original.
      */
     public linkedListImp<E> sorted() {
-        final linkedListImp<E> copy = new linkedListImp();
+        final linkedListImp<E> copy = new linkedListImp<>();
         Node<E> current = this.head;
         while (current != null) {
             copy.pushLast(current.key);
