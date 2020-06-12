@@ -2,17 +2,18 @@ import java.util.Random;
 
 /**
  * Resizable array with built-in sorting method
+ * 
  * @param <T> the type of the elements in the array
  */
 public class D_ArrayImp<T extends Comparable<T>> {
 
     T[] array;
-    private int len; //amount of elements in the array
-    private int capacity; //array current capacity
+    private int len; // amount of elements in the array
+    private int capacity; // array current capacity
 
     /**
-  	 * Initializes an array of size 1
-  	 */
+     * Initializes an array of size 1
+     */
     public D_ArrayImp() {
         @SuppressWarnings("unchecked")
         final T[] a = (T[]) new Comparable[1];
@@ -22,9 +23,10 @@ public class D_ArrayImp<T extends Comparable<T>> {
     }
 
     /**
-  	 * Initializes an array of a specified size
+     * Initializes an array of a specified size
+     * 
      * @param initialCap new array's initial capacity
-  	 */
+     */
     public D_ArrayImp(int initialCap) {
         @SuppressWarnings("unchecked")
         final T[] a = (T[]) new Comparable[initialCap];
@@ -47,7 +49,6 @@ public class D_ArrayImp<T extends Comparable<T>> {
         new_Arr = null;
         capacity *= 2;
     }
-
 
     /**
      * Decreases the array's capacity by half
@@ -308,38 +309,47 @@ public class D_ArrayImp<T extends Comparable<T>> {
      * @return index of specified element
      */
     public int getIndexOf(final T element) {
-        for(int i = 0; i<len; i++){
-            if(array[i].compareTo(element)==0){
+        for (int i = 0; i < len; i++) {
+            if (array[i].compareTo(element) == 0) {
                 return i;
             }
         }
         return -1;
     }
 
-    //r # elementos in list
-  	/**
-  	 * Returns the amount of elements in the array
+    // r # elementos in list
+    /**
+     * Returns the amount of elements in the array
+     * 
      * @return array's length
-  	 */
-    public int getLen() {return this.len;}
-
-    //r tamaño de list
-  	/**
-  	 * Returns the array capacity
-     *@return array's current maximum capcity 
-  	 */
-    public int getSize() {return this.capacity;}
-
-  	/**
-  	 * Checks if the array is empty
-     * @return true if the array is empty 
-  	 */
-    public boolean isEmpty() {return len == 0;}
-
-    public static void main(String args[]){
-        D_ArrayImp<Integer> my_darray = new D_ArrayImp<>(10);
-        my_darray.add(10);
-
-        System.out.println(my_darray.get(9));
+     */
+    public int getLen() {
+        return this.len;
     }
+
+    // r tamaño de list
+    /**
+     * Returns the array capacity
+     * 
+     * @return array's current maximum capcity
+     */
+    public int getSize() {
+        return this.capacity;
+    }
+
+    /**
+     * Checks if the array is empty
+     * 
+     * @return true if the array is empty
+     */
+    public boolean isEmpty() {
+        return len == 0;
+    }
+
+    /*
+     * public static void main(String args[]){ D_ArrayImp<Integer> my_darray = new
+     * D_ArrayImp<>(10); my_darray.add(10);
+     * 
+     * System.out.println(my_darray.get(9)); }
+     */
 }
