@@ -274,7 +274,8 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
     // Ordenamiento
     // O(n), revisa si la lista es numérica para que el ordenamiento tenga sentido
     public boolean isNumerical() {
-        if (head == null) {
+
+        if (this.head == null) {
             return false;
         }
 
