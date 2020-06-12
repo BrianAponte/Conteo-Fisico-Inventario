@@ -54,15 +54,18 @@ public class D_ArrayImp<T extends Comparable<T>> {
      * Decreases the array's capacity by half
      */
     public void rDown() {
-        @SuppressWarnings("unchecked")
-        final T[] a = (T[]) new Comparable[(int) capacity / 2];
-        T[] new_Arr = a;
-        for (int i = 0; i < (capacity / 4); i++) {
-            new_Arr[i] = array[i];
+
+        if (capacity / 2 != 0) {
+            @SuppressWarnings("unchecked")
+            final T[] a = (T[]) new Comparable[(int) capacity / 2];
+            T[] new_Arr = a;
+            for (int i = 0; i < (capacity / 4); i++) {
+                new_Arr[i] = array[i];
+            }
+            array = new_Arr;
+            new_Arr = null;
+            capacity /= 2;
         }
-        array = new_Arr;
-        new_Arr = null;
-        capacity /= 2;
     }
 
     /**
