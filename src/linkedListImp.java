@@ -1,5 +1,3 @@
-package com.inventory;
-
 import java.util.Random;
 
 class Node<E> {
