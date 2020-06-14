@@ -1,3 +1,5 @@
+package com.inventory;
+
 import java.util.Random;
 
 class Node<E> {
@@ -381,30 +383,29 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
         }
     }
 
-    // O(nlogn)
-    /**
-     * Retorna una copia ordenada de la lista, no modifica la original.
-     */
-    public linkedListImp<E> sorted() {
-        final linkedListImp<E> copy = new linkedListImp<>();
-        Node<E> current = this.head;
-        while (current != null) {
-            copy.pushLast(current.key);
-            current = current.next;
-        }
-        copy.sort();
-        return copy;
+	//O(nlogn)
+  	/**
+  	 * Retorna una copia ordenada de la lista, no modifica la original.
+  	 */
+  	/*private LinkedListImp<E> sorted(){
+      LinkedListImp<E> copy = new LinkedListImp();
+      Node current = this.head;
+      while (current !=null) {
+          copy.pushLast(current.key);
+          current = current.next;
+      }
+      copy.sort();
+      return copy;
     }
-
-    // O(n)
-    /**
-     * Busca el elemento key en la lista
-     * 
-     * @Param key
-     * @Return keyInList
-     */
-    public boolean inList(final E key) {
-        Node<E> n = head;
+    */
+    //O(n)
+  	/**
+  	 * Busca el elemento key en la lista
+  	 * @Param key
+  	 * @Return keyInList
+  	 */
+    private boolean inList(E key) {
+        Node n = head;
         while (n != null) {
             if (n.key == key) {
                 return true;
@@ -448,9 +449,9 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
         ll.pushLast(110);
         System.out.println(ll.inList(106));
         System.out.println("done 1");
-        System.out.println(ll.delete(106));
+        //System.out.println(ll.deleteByKey(106));
         System.out.println("done 2");
-        System.out.println(ll.change(110, 111));
+        //System.out.println(ll.changeByKey(110, 111));
         System.out.println("done 3");
     }
 }
