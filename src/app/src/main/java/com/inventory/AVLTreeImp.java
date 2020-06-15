@@ -14,7 +14,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
         AVLNode leftChild;
         AVLNode rightChild;
         int height;
-    }
+
         public AVLNode(T data) {
             this.data = data;
             parent = null;
@@ -23,7 +23,6 @@ public class AVLTreeImp<T extends Comparable<T>>{
             height = 1;
         }
     }
-
     private AVLNode root;
     /**
      * Initializes an AVL tree of the type specified inside the 
