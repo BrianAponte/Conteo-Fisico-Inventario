@@ -47,120 +47,12 @@
         app:layout_constraintVertical_bias="0.067"
         app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
-    <EditText
-        android:id="@+id/create_password"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:ems="10"
-        android:hint="@string/category"
-        android:inputType="text"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColorHint="#838C95"
-        app:layout_constraintBottom_toTopOf="@+id/create_stock"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/create_user"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:ems="10"
-        android:hint="@string/art_name"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColorHint="#838C95"
-        app:layout_constraintBottom_toTopOf="@+id/create_category"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_sku"
-        app:layout_constraintVertical_bias="0.48" />
-
-    <EditText
-        android:id="@+id/create_id"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:autofillHints="@string/addSKU"
-        android:ems="10"
-        android:hint="@string/addSKU"
-        android:inputType="none|text"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColorHint="#838C95"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/create_user_button_da"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="16dp"
-        android:onClick="addArt"
-        android:text="Crear"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
-
-    <Button
-        android:id="@+id/create_user_button_map"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:onClick="back"
-        android:shadowColor="#B5AEAE"
-        android:text="Volver"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
-        app:layout_constraintStart_toEndOf="@+id/create_prod"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="523dp" />
-
-    <TextView
-        android:id="@+id/create_success"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Articulo creado correctamente"
-        android:textColor="#29C829"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/prod_error"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_prod"
-        app:layout_constraintVertical_bias="0.725" />
-
-    <TextView
-        android:id="@+id/create_error"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:textColor="#FF0000"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -199,8 +91,103 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/create_sku"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/addSKU"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/create_artN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/create_artN"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/art_name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/create_category"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/create_category"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/category"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/create_stock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/back_userM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="88dp"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.118" />
+
+    <Button
+        android:id="@+id/create_prod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crear "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/back_userM"
+        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.118" />
+
+    <TextView
+        android:id="@+id/prod_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:text="TextView"
+        android:textColor="#29C829"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/prod_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="SKU ya registrado"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/prod_success"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
