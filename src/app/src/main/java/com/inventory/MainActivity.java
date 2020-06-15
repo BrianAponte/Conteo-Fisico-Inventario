@@ -38,12 +38,45 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void login_da(View v) {
+        String user_n = username_et.getText().toString();
+        String password = password_et.getText().toString();
+        TextView error = findViewById(R.id.error_text);
+        if(!user_n.matches("")&&!password.matches("")) {
+            long user =  Long.parseLong(username_et.getText().toString());
+            user_management user_m = user_management.getInstance();
+            if(!(user_m.DAUsers == 0)){
 
-        // Do something in response to button
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        String message = username_et.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
+                for(int i = 0; i<user_m.DAUsers;i++){
+                    User u = user_m.user_list.get(i);
+                    if(u.id == user){
+                        if(u.pass == password){
+                            //user exists and uN and Pass are ok
+                            Intent intent = new Intent(this, DisplayMessageActivity.class);
+                            String message = "Bienvenido " + u.name + "!";
+                            intent.putExtra(EXTRA_MESSAGE, message);
+                            startActivity(intent);
+                        } else {
+                            //contraseña incorrecta
+                            error.setText("Contraseña incorrecta");
+                            error.setVisibility(View.VISIBLE);
+                        }
+
+                    } else {
+                        //id no registrado
+                        error.setText("ID de usuario no está registrado");
+                        error.setVisibility(View.VISIBLE);
+                    }
+                }
+
+            } else {
+                error.setText("No existen usuarios DA");
+                error.setVisibility(View.VISIBLE);
+            }
+
+        } else {
+            error.setText("Rellene todos los campos");
+            error.setVisibility(View.VISIBLE);
+        }
     }
 
     public void login_avl(View v){
