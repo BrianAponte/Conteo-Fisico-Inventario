@@ -41,7 +41,7 @@ public class user_management {
     }
 
     public User findDA(User user){
-        return user_list.
+        return user_list;
     }
 
 
