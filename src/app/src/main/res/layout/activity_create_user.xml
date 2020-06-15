@@ -142,7 +142,7 @@
         android:text="CREAR-AVL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/create_user_button_da"
-        app:layout_constraintHorizontal_bias="0.425"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_password"
         app:layout_constraintVertical_bias="0.004" />
@@ -151,15 +151,14 @@
         android:id="@+id/create_user_button_map"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
+        android:layout_marginStart="68dp"
         android:onClick="addUser_map"
         android:text="CREAR-MAP"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/create_user_button_da"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/create_user_button_da"
-        app:layout_constraintTop_toBottomOf="@+id/create_password"
-        app:layout_constraintVertical_bias="0.307" />
+        app:layout_constraintTop_toTopOf="@+id/create_user_button_da" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
