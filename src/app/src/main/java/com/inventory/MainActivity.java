@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        login_button = (Button)findViewById(R.id.Login_button);
+        login_button = (Button)findViewById(R.id.Login_button_da);
         username_et = (EditText)findViewById(R.id.UserId);
         password_et = (EditText)findViewById(R.id.Password);
 
@@ -39,12 +39,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void login(View view) {
+    public void login_da(View v) {
 
         // Do something in response to button
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         String message = username_et.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+
+    public void login_avl(View v){
+
+    }
+
+    public void login_map(View v){
+
     }
 }

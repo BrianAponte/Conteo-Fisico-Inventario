@@ -18,8 +18,8 @@ public class createUser extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
     }
 
-    public void addUser(View v){
-        create_button = (Button)findViewById(R.id.create_user_button);
+    public void addUser_da(View v){
+        create_button = (Button)findViewById(R.id.create_user_button_da);
         id_et = (EditText)findViewById(R.id.create_id);
         username_et = (EditText)findViewById(R.id.create_user);
         password_et = (EditText)findViewById(R.id.create_password);
@@ -35,4 +35,14 @@ public class createUser extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    public void addUser_avl(View v){
+
+    }
+
+    public void addUser_map(View v){
+
+    }
+
+
 }
