@@ -67,6 +67,7 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
      * 
      * @Param key
      */
+    
     public void pushFirst(final E key) {
         final Node<E> n = new Node<>(key);
         n.next = null;

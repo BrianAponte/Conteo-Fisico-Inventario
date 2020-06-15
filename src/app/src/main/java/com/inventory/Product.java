@@ -7,7 +7,7 @@ public class Product {
     String category;
     int stock;
     int counted;
-
+    
     public Product(String sku, String name, String category, int stock, int counted) {
         this.sku = sku;
         this.name = name;
