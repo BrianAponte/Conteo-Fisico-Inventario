@@ -1,6 +1,6 @@
 package com.inventory;
 
-public class User{
+public class User {
     long id;
     String name;
     String pass;

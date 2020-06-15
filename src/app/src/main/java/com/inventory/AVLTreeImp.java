@@ -1,8 +1,12 @@
+package com.inventory;
+
 /**
  * Self Balancing binary tree
  * @author slondonoq
  * @param <T> the type of the elements in the tree (must implement Comparable)
  */
+
+
 public class AVLTreeImp<T extends Comparable<T>>{
     private class AVLNode{
         T data;

@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     Button login_button;
     EditText username_et, password_et;
     TextView create_user_tv;
-    dArrayImp<User> userList_da;
+    D_ArrayImp<User> userList_da;
     String username,password;
 
     public static final String EXTRA_MESSAGE = "com.inventory.MESSAGE";
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         password_et = (EditText)findViewById(R.id.Password);
 
 
-        userList_da = new dArrayImp<>();
+        userList_da = new D_ArrayImp<>();
 
     }
 

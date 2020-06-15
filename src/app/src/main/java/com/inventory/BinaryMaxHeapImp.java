@@ -1,8 +1,11 @@
-/** 
+package com.inventory;
+
+/**
  * Array based binary max heap
  * @param <T> the type of elements in the array
  *@author slondonoq
- */ 
+ */
+
 class BinaryMaxHeapImp <T extends Comparable<T>>{
     private D_ArrayImp<T> HeapArr;
 

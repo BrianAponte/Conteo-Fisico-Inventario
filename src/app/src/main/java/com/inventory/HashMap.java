@@ -1,3 +1,5 @@
+package com.inventory;
+
 class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Comparable<HashNode<K,V>>{
     private final K Key;
     private final V Value;
