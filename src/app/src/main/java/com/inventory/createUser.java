@@ -60,16 +60,18 @@ public class createUser extends AppCompatActivity {
         String newPass = password_et.getText().toString();
         User newUser = new User(newId, newUserN, newPass);
         user_management user_m = user_management.getInstance();
-        TextView error = findViewById(R.id.creation_error);
-        TextView success = findViewById(R.id.creation_success);
+        TextView error = findViewById(R.id.create_error);
+        TextView success = findViewById(R.id.create_success);
         User userFound = user_m.findAVL(newUser);
         if(userFound==null||userFound.id!=newId) {
             user_m.addUserAVL(newUser);
+            error.setVisibility(View.INVISIBLE);
             success.setVisibility(View.VISIBLE);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
         else {
+            success.setVisibility(View.INVISIBLE);
             error.setVisibility(View.VISIBLE);
         }
     }

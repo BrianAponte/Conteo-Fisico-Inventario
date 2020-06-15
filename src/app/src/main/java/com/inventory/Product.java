@@ -1,6 +1,6 @@
 package com.inventory;
 
-public class Product {
+public class Product implements Comparable<Product>{
 
     String sku;
     String name;
@@ -18,6 +18,13 @@ public class Product {
 
     public int compareTo(Product otherProduct){
         return this.name.compareToIgnoreCase(otherProduct.name);
+    }
+
+    public void updateCount(int amount, boolean increase) {
+        if(increase) {
+            this.counted+=amount;
+        }
+        else {this.counted-=amount;}
     }
 
 }

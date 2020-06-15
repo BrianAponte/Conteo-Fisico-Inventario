@@ -92,8 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 if(user==userFound.id) {
                     if(password.matches(userFound.pass)) {
                         Intent intent = new Intent(this, DisplayMessageActivity.class);
-                        String message = user_m.greetAVLUser(userFound);
-                        intent.putExtra(EXTRA_MESSAGE, message);
+                        intent.putExtra("user_name", userFound.name);
                         startActivity(intent);
                     }
                     else {
