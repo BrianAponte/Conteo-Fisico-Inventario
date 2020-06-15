@@ -7,26 +7,31 @@
     tools:context=".DisplayMessageActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/greeting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#73BADA"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/avl_users"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintVertical_bias="0.643" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/avl_users"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hola!"
-        android:textAlignment="center"
+        android:layout_marginBottom="548dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

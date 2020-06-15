@@ -35,130 +35,145 @@
     <!-- __________________________________________________________________________________________________________________________ -->
 
     <ImageView
-    android:id="@+id/imageView"
-    android:layout_width="80dp"
-    android:layout_height="70dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.498"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintVertical_bias="0.198"
-    app:srcCompat="@android:mipmap/sym_def_app_icon" />
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.198"
+        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
 
     <EditText
         android:id="@+id/create_password"
-        android:layout_width="215dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="6dp"
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:ems="10"
+        android:hint="@string/pass"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/create_user_button_da"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHint="#838C95"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Contraseña"
-        app:layout_constraintVertical_bias="0.048" />
+        app:layout_constraintTop_toBottomOf="@+id/create_user"
+        app:layout_constraintVertical_bias="0.15" />
 
     <EditText
         android:id="@+id/create_user"
-        android:layout_width="215dp"
-        android:layout_height="38dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:ems="10"
+        android:hint="@string/userN"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHint="#838C95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Usuario"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintTop_toBottomOf="@+id/create_id" />
 
     <EditText
         android:id="@+id/create_id"
-        android:layout_width="215dp"
+        android:layout_width="222dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/Usuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Id"
-        app:layout_constraintVertical_bias="0.21" />
-
-
-    <TextView
-        android:id="@+id/Id"
-        android:layout_width="215dp"
-        android:layout_height="16dp"
-        android:layout_marginTop="96dp"
-        android:text="Id"
+        android:hint="@string/user"
+        android:inputType="number"
         android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHint="#838C95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/Usuario"
-        android:layout_width="215dp"
-        android:layout_height="19dp"
-        android:text="Usuario"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.462" />
-
-    <TextView
-        android:id="@+id/Contraseña"
-        android:layout_width="215dp"
-        android:layout_height="19dp"
-        android:layout_marginTop="21dp"
-        android:text="Contraseña"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_user"
-        app:layout_constraintVertical_bias="0.007" />
-
     <Button
         android:id="@+id/create_user_button_da"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="136dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:onClick="addUser_da"
-        android:text="Crear-da"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Contraseña" />
+        android:text="Crear DA"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/create_user_button_map"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/create_user_button_avl"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.102" />
 
     <Button
         android:id="@+id/create_user_button_avl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:layout_marginEnd="44dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:onClick="addUser_avl"
-        android:text="CREAR-AVL"
+        android:text="Crear AVL"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/create_user_button_da"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.29"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_password"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.102" />
 
     <Button
         android:id="@+id/create_user_button_map"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:onClick="addUser_map"
+        android:shadowColor="#B5AEAE"
+        android:text="Crear MAP"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.652"
+        app:layout_constraintStart_toEndOf="@+id/create_user_button_da"
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        app:layout_constraintVertical_bias="0.102" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:onClick="addUser_map"
-        android:text="CREAR-MAP"
-        app:layout_constraintBottom_toBottomOf="@+id/create_user_button_da"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="472dp" />
+
+    <TextView
+        android:id="@+id/creation_success"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario creado correctamente"
+        android:textColor="#29C829"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/creation_error"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/create_user_button_da"
-        app:layout_constraintTop_toTopOf="@+id/create_user_button_da" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_user_button_da"
+        app:layout_constraintVertical_bias="0.641" />
+
+    <TextView
+        android:id="@+id/creation_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:text="ID de usuario ya está registrada"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

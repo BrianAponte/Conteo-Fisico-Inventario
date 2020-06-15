@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.*;
@@ -27,10 +28,7 @@ public class MainActivity extends AppCompatActivity {
         login_button = (Button)findViewById(R.id.Login_button_da);
         username_et = (EditText)findViewById(R.id.UserId);
         password_et = (EditText)findViewById(R.id.Password);
-
-
         userList_da = new D_ArrayImp<>();
-
     }
 
     public void addUser(View v){
@@ -49,7 +47,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login_avl(View v){
+        String user_n = username_et.getText().toString();
+        String password = password_et.getText().toString();
+        TextView error = findViewById(R.id.error_text);
+        if(!user_n.matches("")&&!password.matches("")) {
+            long user =  Long.parseLong(username_et.getText().toString());
+            user_management user_m = user_management.getInstance();
 
+            if(user_m.AVLUsers!=0){
+                User userFound = user_m.findAVL(new User(user, "", password));
+                if(user==userFound.id) {
+                    if(password.matches(userFound.pass)) {
+                        Intent intent = new Intent(this, DisplayMessageActivity.class);
+                        String message = user_m.greetAVLUser(userFound);
+                        intent.putExtra(EXTRA_MESSAGE, message);
+                        startActivity(intent);
+                    }
+                    else {
+                        error.setText("Contraseña incorrecta");
+                        error.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    error.setText("ID de usuario no está registrado");
+                    error.setVisibility(View.VISIBLE);
+                }
+            }
+            else {
+                error.setText("No existen usuarios AVL");
+                error.setVisibility(View.VISIBLE);
+            }
+        }
+        else {
+            error.setText("Rellene todos los campos");
+            error.setVisibility(View.VISIBLE);
+        }
     }
 
     public void login_map(View v){

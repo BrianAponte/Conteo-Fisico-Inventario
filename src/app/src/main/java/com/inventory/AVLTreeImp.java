@@ -437,4 +437,9 @@ public class AVLTreeImp<T extends Comparable<T>>{
             inOrderT(node.rightChild, arr);
         }
     }
+
+    public T findData(T data) {
+        AVLNode found = find(data);
+        return found==null?null:found.data;
+    }
 }
