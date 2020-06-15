@@ -12,7 +12,7 @@ public class Vista_Articulos extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vista__articulos);
+        setContentView(R.layout.activity_vista_articulos);
 
         LinearLayout mLayout=(LinearLayout)findViewById(R.id.art_layout);
         art_management a_m = art_management.getInstance();
