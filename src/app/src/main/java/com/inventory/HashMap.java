@@ -45,7 +45,7 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
 /// Methods
     /**
      * Returns the Table actual capacity.
-     * @param None
+     * @param /None
      * @return Capacity.
      */
     public int getCapacity()
@@ -53,7 +53,7 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
 
     /**
      * Returns the number of elements.
-     * @param None
+     * @param /None
      * @return Number of elements.
      */
     public int getLen()

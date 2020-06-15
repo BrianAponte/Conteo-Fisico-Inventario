@@ -8,13 +8,13 @@ package com.inventory;
 
 
 public class AVLTreeImp<T extends Comparable<T>>{
-    private class AVLNode{
+    private class AVLNode {
         T data;
         AVLNode parent;
         AVLNode leftChild;
         AVLNode rightChild;
         int height;
-
+    }
         public AVLNode(T data) {
             this.data = data;
             parent = null;
