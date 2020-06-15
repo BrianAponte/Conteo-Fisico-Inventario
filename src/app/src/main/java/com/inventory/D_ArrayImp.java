@@ -302,6 +302,10 @@ public class D_ArrayImp<T extends Comparable<T>> {
         return false;
     }
 
+    public T findT(){
+        
+    }
+
     /**
      * Searchs for a specified element in the array and returns it's index. If the
      * array doesn't contain such element, -1 is returned

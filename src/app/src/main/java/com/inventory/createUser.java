@@ -26,13 +26,24 @@ public class createUser extends AppCompatActivity {
         username_et = (EditText)findViewById(R.id.create_user);
         password_et = (EditText)findViewById(R.id.create_password);
 
-        int newId = Integer.parseInt(id_et.getText().toString());
-        String newUser = username_et.getText().toString();
+        long newId = Long.parseLong(id_et.getText().toString());
+        String newUserN = username_et.getText().toString();
         String newPass = password_et.getText().toString();
+        User  newUser = new User(newId,newUserN,newPass);
 
-        //userList_da.add(new User(id,name,pass));
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        user_management user_m = user_management.getInstance();
+        TextView error = findViewById(R.id.creation_error);
+        TextView success = findViewById(R.id.creation_success);
+        User userFound = user_m.findAVL(newUser);
+        if(userFound==null||userFound.id!=newId) {
+            user_m.addUser(newUser);
+            success.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else {
+            error.setVisibility(View.VISIBLE);
+        }
     }
 
     public void addUser_avl(View v){
