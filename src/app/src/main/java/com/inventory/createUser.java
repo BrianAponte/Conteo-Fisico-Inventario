@@ -34,16 +34,18 @@ public class createUser extends AppCompatActivity {
         user_management user_m = user_management.getInstance();
         TextView error = findViewById(R.id.creation_error);
         TextView success = findViewById(R.id.creation_success);
-        User userFound = user_m.findAVL(newUser);
-        if(userFound==null||userFound.id!=newId) {
+
+        //no hay alguien con ese id
+        if(!(user_m.user_list.get(user_m.user_list.getIndexOf(newUser)).id == newUser.id)){
             user_m.addUser(newUser);
             success.setVisibility(View.VISIBLE);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }
-        else {
+        } else {
+            //si ya hay alguien con ese id
             error.setVisibility(View.VISIBLE);
         }
+
     }
 
     public void addUser_avl(View v){

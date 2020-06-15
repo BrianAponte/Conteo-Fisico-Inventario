@@ -15,8 +15,8 @@ public class user_management {
         AVLUsers = 0;
     }
 
-    public void addUser(long id, String name, String pass) {
-        user_list.add(new User(id, name, pass));
+    public void addUser(User user) {
+        user_list.add(user);
         DAUsers++;
     }
 
@@ -40,9 +40,6 @@ public class user_management {
         return user_tree.findData(user);
     }
 
-    public User findDA(User user){
-        return user_list.
-    }
 
 
     public String greetAVLUser(User user) {
