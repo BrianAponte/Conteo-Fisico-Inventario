@@ -117,6 +117,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login_map(View v){
+        String user_n = username_et.getText().toString();
+        String password = password_et.getText().toString();
+        TextView error = findViewById(R.id.error_text);
+        long startTime = System.nanoTime();
 
+        if(!user_n.matches("")&&!password.matches("")) {
+            long user =  Long.parseLong(username_et.getText().toString());
+            user_management user_m = user_management.getInstance();
+            System.out.println(user_m.HashMapUsers);
+            if(user_m.HashMapUsers != 0){
+                User userFound = user_m.findHashMap(new User(user, "", password));
+                if(userFound != null) {
+                    if(password.matches(userFound.pass)) {
+                        Intent intent = new Intent(this, DisplayMessageActivity.class);
+                        String message = "Bienvenido? nop " + userFound.id;
+                        intent.putExtra(EXTRA_MESSAGE, message);
+                        startActivity(intent);
+                    }
+                    else {
+                        error.setText("Contraseña incorrecta" + "  Time: " + (System.nanoTime() - startTime));
+                        error.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    error.setText("ID de usuario no está registrado" + "  Time: " + (System.nanoTime() - startTime));
+                    error.setVisibility(View.VISIBLE);
+                }
+            }
+            else {
+                error.setText("No existen usuarios HashMap" + "  Time: " + (System.nanoTime() - startTime));
+                error.setVisibility(View.VISIBLE);
+            }
+        }
+        else {
+            error.setText("Rellene todos los campos" + "  Time: " + (System.nanoTime() - startTime));
+            error.setVisibility(View.VISIBLE);
+        }
     }
 }

@@ -76,9 +76,30 @@ public class createUser extends AppCompatActivity {
         }
     }
 
-    public void addUser_map(View v){
+    public void addUser_hashmap(View v){
+        id_et = (EditText)findViewById(R.id.create_id);
+        username_et = (EditText)findViewById(R.id.create_user);
+        password_et = (EditText)findViewById(R.id.create_password);
 
+        long newId = Long.parseLong(id_et.getText().toString());
+        String newName = username_et.getText().toString();
+        String newPass = password_et.getText().toString();
+        User newUser = new User(newId, newName, newPass);
+        user_management user_m = user_management.getInstance();
+        TextView error = findViewById(R.id.create_error);
+        TextView success = findViewById(R.id.create_success);
+        User userFound = user_m.findHashMap(newUser);
+        if(userFound==null||userFound.id!=newId) {
+            user_m.addUserHashMap(newUser);
+            error.setVisibility(View.INVISIBLE);
+            success.setVisibility(View.VISIBLE);
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+        else {
+            success.setVisibility(View.INVISIBLE);
+            error.setVisibility(View.VISIBLE);
+        }
     }
-
 
 }
