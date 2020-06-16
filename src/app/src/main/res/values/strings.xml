@@ -4,4 +4,10 @@
     <string name="user">Ingrese ID de usuario</string>
     <string name="userN">Ingrese nombre de usuario</string>
     <string name="noUser">¿No tienes un usuario?</string>
+    <string name="filter">Ingrese filtro</string>
+    <string name="addSKU">Ingrese SKU</string>
+    <string name="category">Ingrese Categoría</string>
+    <string name="art_name">Ingrese Nombre</string>
+    <string name="stock">Ingrese stock actual</string>
+    <string name="count">Ingrese conteo</string>
 </resources>
