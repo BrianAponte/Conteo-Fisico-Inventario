@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
                 for(int i = 0; i<user_m.DAUsers;i++){
                     User u = user_m.user_list.get(i);
                     if(u.id == user){
-                        if(u.pass == password){
+                        if(u.pass.matches(password)){
                             //user exists and uN and Pass are ok
                             Intent intent = new Intent(this, DisplayMessageActivity.class);
-                            String message = "Bienvenido " + u.name + "!";
-                            intent.putExtra(EXTRA_MESSAGE, message);
+                            
+                            intent.putExtra("user_name", u.name);
                             startActivity(intent);
                         } else {
                             //contraseña incorrecta

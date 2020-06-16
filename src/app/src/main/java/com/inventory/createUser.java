@@ -33,8 +33,8 @@ public class createUser extends AppCompatActivity {
 
 
         user_management user_m = user_management.getInstance();
-        TextView error = findViewById(R.id.creation_error);
-        TextView success = findViewById(R.id.creation_success);
+        TextView error = findViewById(R.id.create_error);
+        TextView success = findViewById(R.id.create_success);
 
         //no hay alguien con ese id o está vacía la lista
         if(user_m.DAUsers == 0 || user_m.user_list.get(user_m.user_list.getIndexOf(newUser) ) == null || !(user_m.user_list.get(user_m.user_list.getIndexOf(newUser)).id == newUser.id)){
