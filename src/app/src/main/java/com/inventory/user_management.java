@@ -7,11 +7,13 @@ public class user_management {
 
     D_ArrayImp<User> user_list;
     AVLTreeImp<User> user_tree;
-    int DAUsers, AVLUsers;
+    HashMap<Long ,User> user_hashmap;
+    int DAUsers, AVLUsers, HashMapUsers;
 
     public user_management(){
         user_list = new D_ArrayImp<>();
         user_tree = new AVLTreeImp<>();
+        user_hashmap = new HashMap<>(10);
         AVLUsers = 0;
     }
 
@@ -23,6 +25,11 @@ public class user_management {
     public void addUserAVL(User user) {
         user_tree.insert(user);
         AVLUsers++;
+    }
+
+    public void addUserHashMap(User user) {
+        user_hashmap.add(user.id, user);
+        HashMapUsers++;
     }
 
     public int amountOfAVLUsers(){
@@ -41,11 +48,17 @@ public class user_management {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public User findDA(User user){
         return user_list;
     }
 =======
 >>>>>>> 50f14424b373844bc1fd68a5878f09cfd87fc1e5
+=======
+    public User findHashMap(User user) {
+        return user_hashmap.get(user.id);
+    }
+>>>>>>> eb4441ae9e58d1865070091ef87fb68ffd35eace
 
 
     public String greetAVLUser(User user) {
