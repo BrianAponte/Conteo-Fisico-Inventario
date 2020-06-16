@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         login_button = (Button)findViewById(R.id.Login_button_da);
         username_et = (EditText)findViewById(R.id.UserId);
         password_et = (EditText)findViewById(R.id.Password);
-        userList_da = new D_ArrayImp<>();
+        //userList_da = new D_ArrayImp<>();
 
         user_management um = user_management.getInstance();
         //lena el da
