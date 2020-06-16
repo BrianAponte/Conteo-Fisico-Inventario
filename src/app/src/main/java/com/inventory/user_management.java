@@ -47,18 +47,18 @@ public class user_management {
         return user_tree.findData(user);
     }
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 <<<<<<< HEAD
     public User findDA(User user){
         return user_list;
     }
 =======
 >>>>>>> 50f14424b373844bc1fd68a5878f09cfd87fc1e5
-=======
+=======*/
     public User findHashMap(User user) {
         return user_hashmap.get(user.id);
     }
->>>>>>> eb4441ae9e58d1865070091ef87fb68ffd35eace
+//>>>>>>> eb4441ae9e58d1865070091ef87fb68ffd35eace
 
 
     public String greetAVLUser(User user) {
