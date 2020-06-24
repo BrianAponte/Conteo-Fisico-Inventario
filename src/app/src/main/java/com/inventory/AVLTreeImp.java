@@ -420,6 +420,23 @@ public class AVLTreeImp<T extends Comparable<T>>{
         }
         return arr;
     }
+
+    /**
+     * Returns a D_ArrayImp (dynamic array) with all the data that's between a specified range,
+     * does not include the range end
+     * @param rangeStart Start of the range
+     * @param rangeEnd End of the range
+     * @return Dynamic array with those elements
+     */
+    public D_ArrayImp<T> rangeSearchN(T rangeStart, T rangeEnd) {
+        D_ArrayImp<T> arr = new D_ArrayImp<>();
+        AVLNode next = next(find(rangeStart));
+        while(next.data.compareTo(rangeEnd)<0) {
+            arr.add(next.data);
+            next = next(next);
+        }
+        return arr;
+    }
     /**
      * Returns a D_ArrayImp (dynamic array) with the In-Order traversal of the tree
      * @return dynamic array with the traversal

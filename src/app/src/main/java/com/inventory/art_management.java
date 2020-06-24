@@ -27,7 +27,10 @@ public class art_management {
         return articulos.getInOrder();
     }
 
-    public Product findProd(Product prod) {
-        return articulos.findData(prod);
+    public Product findProd(Product prod) {return articulos.findData(prod); }
+
+    public D_ArrayImp<Product> Filter(String filter, String end) {
+        return articulos.rangeSearchN(new Product("", filter, "", 0, 0),
+                new Product("", end, "", 0, 0));
     }
 }
