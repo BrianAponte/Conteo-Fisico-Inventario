@@ -196,7 +196,7 @@ public class D_ArrayImp<T extends Comparable<T>> {
         int m2 = l + 1;
 
         for (int i = l + 1; i <= r; i++) {
-            if (a[i].compareTo(x) == -1) {
+            if (a[i].compareTo(x) < 0) {
                 if (m1 == m2 - 1) {
                     final T temp = a[i];
                     a[i] = a[m2];

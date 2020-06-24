@@ -42,10 +42,10 @@ public class AVLTreeImp<T extends Comparable<T>>{
         }
         else {
             AVLNode posParent = find(data);
-            if(posParent.data.compareTo(data)==1) {
+            if(posParent.data.compareTo(data)>0) {
                 posParent.leftChild = newNode;
                 newNode.parent = posParent;
-                if(data.compareTo(root.data)==1) {
+                if(data.compareTo(root.data)>0) {
                     updateRHeight();
                 }
                 else {
@@ -53,10 +53,10 @@ public class AVLTreeImp<T extends Comparable<T>>{
                 }
                 balance(posParent);
             }
-            else if(posParent.data.compareTo(data)==-1) {
+            else if(posParent.data.compareTo(data)<0) {
                 posParent.rightChild = newNode;
                 newNode.parent = posParent;
-                if(data.compareTo(root.data)==1) {
+                if(data.compareTo(root.data)>0) {
                     updateRHeight();
                 }
                 else {
@@ -83,7 +83,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
             if(currentNode.data.compareTo(data)==0) {
                 return currentNode;
             }
-            else if(currentNode.data.compareTo(data)==1) {
+            else if(currentNode.data.compareTo(data)>0) {
                 if(currentNode.leftChild==null) {
                     return currentNode;
                 }
@@ -224,7 +224,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
         if(pivot.parent==null) {
             root = pivot;
         } else {
-            if(pivot.parent.data.compareTo(pivot.data)==1){
+            if(pivot.parent.data.compareTo(pivot.data)>0){
                 pivot.parent.leftChild = pivot;
             } else {
                 pivot.parent.rightChild = pivot;
@@ -240,7 +240,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
         if(pivot.parent==null) {
             root = pivot;
         } else {
-            if(pivot.parent.data.compareTo(pivot.data)==1){
+            if(pivot.parent.data.compareTo(pivot.data)>0){
                 pivot.parent.leftChild = pivot;
             } else {
                 pivot.parent.rightChild = pivot;
@@ -265,11 +265,11 @@ public class AVLTreeImp<T extends Comparable<T>>{
         
         //If this point is reached we need to search for it's ancestors
         AVLNode current = node;
-        while(current.parent!=null&&current.parent.data.compareTo(node.data)==-1) {
+        while(current.parent!=null&&current.parent.data.compareTo(node.data)<0) {
             current = current.parent;
         }
 
-        if(current.parent== null) {return current.data.compareTo(node.data)==1?current:null;}
+        if(current.parent== null) {return current.data.compareTo(node.data)>0?current:null;}
 
         return current.parent;
     }
@@ -288,14 +288,14 @@ public class AVLTreeImp<T extends Comparable<T>>{
                 root = null;
             }
             else {
-                if(node.parent.data.compareTo(node.data)==1) {
+                if(node.parent.data.compareTo(node.data)>0) {
                    node.parent.leftChild = null;
                 }
                 else {
                     node.parent.rightChild = null;
                 }
 
-                if(node.data.compareTo(root.data)==1) {
+                if(node.data.compareTo(root.data)>0) {
                     updateRHeight();
                 }
                 else{
@@ -311,7 +311,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                //reduce height and call balance to make sure we don't unbalance the tree
                if(node.parent!=null){
                     node.leftChild.parent = node.parent;
-                    if(node.parent.data.compareTo(node.data)==1) {
+                    if(node.parent.data.compareTo(node.data)>0) {
                         node.parent.leftChild = node.leftChild;
                         
                     }
@@ -319,7 +319,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                         node.parent.rightChild = node.leftChild;
                     }
 
-                    if(node.data.compareTo(root.data)==1) {
+                    if(node.data.compareTo(root.data)>0) {
                         updateRHeight();
                     }
                     else{
@@ -344,7 +344,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                 if(node.rightChild.data.compareTo(next.data)==0) {
                     next.parent = node.parent;
                     if(node.parent != null) {
-                        if(node.parent.data.compareTo(node.data)==1) {
+                        if(node.parent.data.compareTo(node.data)>0) {
                             node.parent.leftChild = next;
                         
                         }
@@ -352,7 +352,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                             node.parent.rightChild = next;
                         }
 
-                        if(node.data.compareTo(root.data)==-1) {
+                        if(node.data.compareTo(root.data)<0) {
                             updateLHeight();
                         }
                         else{
@@ -382,7 +382,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     next.rightChild = node.rightChild;
                     next.parent = node.parent;
                     if(node.parent!=null) {
-                        if(node.parent.data.compareTo(node.data)==1) {
+                        if(node.parent.data.compareTo(node.data)>0) {
                             node.parent.leftChild = next;
                         }
                         else {
@@ -394,7 +394,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     }
                     
 
-                    if(node.data.compareTo(root.data)==-1) {
+                    if(node.data.compareTo(root.data)<0) {
                         updateLHeight();
                     }
                     else{
@@ -414,7 +414,7 @@ public class AVLTreeImp<T extends Comparable<T>>{
     public D_ArrayImp<T> rangeSearch(T rangeStart, T rangeEnd) {
         D_ArrayImp<T> arr = new D_ArrayImp<>();
         AVLNode next = next(find(rangeStart));
-        while(next.data.compareTo(rangeEnd)!=1) {
+        while(next.data.compareTo(rangeEnd)<=0) {
             arr.add(next.data);
             next = next(next);
         }

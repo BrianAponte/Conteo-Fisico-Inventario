@@ -44,7 +44,7 @@ class BinaryMaxHeapImp <T extends Comparable<T>>{
     private void siftUp(int indexFrom) {
         while (indexFrom>0) {
             //Checking if the swap is needed
-            if(HeapArr.get(indexFrom).compareTo(HeapArr.get(parent(indexFrom)))==-1) {
+            if(HeapArr.get(indexFrom).compareTo(HeapArr.get(parent(indexFrom)))<0) {
                 //if it's not, we stop
                 return;
             }
@@ -85,14 +85,14 @@ class BinaryMaxHeapImp <T extends Comparable<T>>{
             //to perform the swap, it could happen if there is a right child
             if(rightChild(index)<HeapArr.getLen()) {
                 //If there is a right chid we want to see if it is the maximum between the children
-                if(HeapArr.get(leftChild(index)).compareTo(HeapArr.get(rightChild(index)))==-1) {
+                if(HeapArr.get(leftChild(index)).compareTo(HeapArr.get(rightChild(index)))<0) {
                     //If that's the case, indexOfSwap needs to be changed
                     indexOfSwap = rightChild(index);
                 }
             }
 
             //All that is left is to check if the swap is needed
-            if(HeapArr.get(index).compareTo(HeapArr.get(indexOfSwap))==1) {
+            if(HeapArr.get(index).compareTo(HeapArr.get(indexOfSwap))>0) {
                 //If that's not the case, the heap property is not violated
                 //and thus, we end the function
                 return;
@@ -131,10 +131,10 @@ class BinaryMaxHeapImp <T extends Comparable<T>>{
         try{HeapArr.pop();}
         catch(Exception e) {}
         //All that's left to do decide if a sift operation is needed
-        if(dataToDelete.compareTo(HeapArr.get(dataIndex)) ==-1) {
+        if(dataToDelete.compareTo(HeapArr.get(dataIndex)) <0) {
             siftUp(dataIndex);
         }
-        else if(dataToDelete.compareTo(HeapArr.get(dataIndex)) ==1) {
+        else if(dataToDelete.compareTo(HeapArr.get(dataIndex)) >0) {
             siftDown(dataIndex);
         }
     }
@@ -159,7 +159,7 @@ class BinaryMaxHeapImp <T extends Comparable<T>>{
         }
 
         //If it's not, we need to compare the new data with it's parent and possibly a child
-        if(HeapArr.get(parent(indexOfData)).compareTo(HeapArr.get(indexOfData))==-1) {
+        if(HeapArr.get(parent(indexOfData)).compareTo(HeapArr.get(indexOfData))<0) {
             //If the child is greater, we need to perform a siftUp
             siftUp(indexOfData);
             return;
