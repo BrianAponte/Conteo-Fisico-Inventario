@@ -29,8 +29,41 @@ public class art_management {
 
     public Product findProd(Product prod) {return articulos.findData(prod); }
 
-    public D_ArrayImp<Product> Filter(String filter, String end) {
-        return articulos.rangeSearchN(new Product("", filter, "", 0, 0),
-                new Product("", end, "", 0, 0));
+    public D_ArrayImp<Product> Filter(String filter) {
+        String end = getNext(filter);
+
+        if(!end.equals("")) {
+            return articulos.rangeSearchN(new Product("", filter, "", 0, 0),
+                    new Product("", end, "", 0, 0));
+        }
+        else {
+            return articulos.rangeSearchB(new Product("", filter, "", 1, 1));
+        }
+    }
+
+    /**
+     * Returns the next lexicographicly greater string that wouldn't fit
+     * into a given filter string, it returns an empty string if the filter
+     * is any string composed only by one or more "z"
+     * @param s
+     * @return
+     */
+    public static String getNext(String s) {
+        s = s.toLowerCase();
+        int currInd = s.length()-1;
+        String alph = "abcdefghijklmnñopqrstuvwxyz";
+        int alphIndexOfCurr = alph.indexOf(s.substring(currInd, currInd+1));
+
+        if(alphIndexOfCurr!=25) {
+            return s.substring(0, currInd)+alph.charAt(alphIndexOfCurr+1);
+        }
+        else {
+            if(currInd==0) {
+                return "";
+            }
+            else {
+                return getNext(s.substring(0, currInd));
+            }
+        }
     }
 }

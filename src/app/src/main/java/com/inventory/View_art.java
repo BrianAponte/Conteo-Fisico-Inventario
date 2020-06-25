@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 public class View_art extends AppCompatActivity {
     String user_n;
+    art_management am;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,7 @@ public class View_art extends AppCompatActivity {
         user_n = intent.getStringExtra("user_name");
 
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
-        art_management am = art_management.getInstance();
+        am = art_management.getInstance();
         D_ArrayImp<Product> prods = am.getArt();
         for(int i=0;i<prods.getLen();i++) {
             final String product = prods.get(i).name;
@@ -41,13 +42,63 @@ public class View_art extends AppCompatActivity {
         }
     }
 
+    public boolean isAlph(String s) {
+        char[] chars = s.toCharArray();
+        for(char c:chars) {
+            if(!Character.isAlphabetic(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void filter(View v){
         EditText filterBy = (EditText) findViewById(R.id.filter);
+        String filter = filterBy.getText().toString();
+        D_ArrayImp<Product> filtered = new D_ArrayImp<>();
+        TextView error = (TextView) findViewById(R.id.filter_error);
+        boolean doFilter;
 
-        //Hacer una pequeña función que retorne la siguiente cadena lexicograficamente mayor
-        //que no esté incluida en el filtro, ej: filtro="a", siguiente="b". Con esto, llamar
-        //la función Filter() de art_management con ambas cadenas como parámetros y con la lista
-        //que retorna hacer el mismo proceso que al iniciar la vista
+        if(filter.matches("")) {
+            System.out.print("dunno bro");
+            error.setVisibility(View.INVISIBLE);
+            filtered = am.getArt();
+            doFilter = true;
+
+        }
+        else if (!isAlph(filter)){
+            doFilter = false;
+            error.setVisibility(View.VISIBLE);
+        }
+        else {
+            error.setVisibility(View.INVISIBLE);
+            filtered = am.Filter(filter);
+            doFilter = true;
+        }
+
+        if(doFilter) {
+            LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
+            myLayout.removeAllViews();
+            for(int i=0;i<filtered.getLen();i++) {
+                final String product = filtered.get(i).name;
+                TextView tv = new TextView(this);
+                tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT));
+                tv.setText(product);
+                tv.setTextSize(20);
+                tv.setClickable(true);
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(View_art.this, Art_details.class);
+                        intent.putExtra("prod_name", product);
+                        startActivity(intent);
+                    }
+                });
+                myLayout.addView(tv);
+            }
+        }
+
     }
 
     public void back_view(View v) {

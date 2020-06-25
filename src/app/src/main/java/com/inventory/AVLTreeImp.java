@@ -413,10 +413,16 @@ public class AVLTreeImp<T extends Comparable<T>>{
      */
     public D_ArrayImp<T> rangeSearch(T rangeStart, T rangeEnd) {
         D_ArrayImp<T> arr = new D_ArrayImp<>();
-        AVLNode next = next(find(rangeStart));
-        while(next.data.compareTo(rangeEnd)<=0) {
-            arr.add(next.data);
-            next = next(next);
+        AVLNode current = find(rangeStart);
+
+        while(current.data.compareTo(rangeStart)<0) {
+            current = next(current);
+            if(current==null) {return arr;}
+        }
+
+        while(current!=null&&current.data.compareTo(rangeEnd)<=0) {
+            arr.add(current.data);
+            current = next(current);
         }
         return arr;
     }
@@ -430,13 +436,42 @@ public class AVLTreeImp<T extends Comparable<T>>{
      */
     public D_ArrayImp<T> rangeSearchN(T rangeStart, T rangeEnd) {
         D_ArrayImp<T> arr = new D_ArrayImp<>();
-        AVLNode next = next(find(rangeStart));
-        while(next.data.compareTo(rangeEnd)<0) {
-            arr.add(next.data);
-            next = next(next);
+        AVLNode current = find(rangeStart);
+
+        while(current.data.compareTo(rangeStart)<0) {
+            current = next(current);
+            if(current==null) {return arr;}
+        }
+
+        while(current!=null&&current.data.compareTo(rangeEnd)<0) {
+            arr.add(current.data);
+            current = next(current);
         }
         return arr;
     }
+
+    /**
+     * Returns a D_ArrayImp (dynamic array) with all the data that's greater than a specified
+     * range start
+     * @param rangeStart Start of the range
+     * @return Dynamic array with those elements
+     */
+    public D_ArrayImp<T> rangeSearchB(T rangeStart) {
+        D_ArrayImp<T> arr = new D_ArrayImp<>();
+        AVLNode current = find(rangeStart);
+
+        while(current.data.compareTo(rangeStart)<0) {
+            current = next(current);
+            if(current==null) {return arr;}
+        }
+
+        while(current!=null) {
+            arr.add(current.data);
+            current = next(current);
+        }
+        return arr;
+    }
+
     /**
      * Returns a D_ArrayImp (dynamic array) with the In-Order traversal of the tree
      * @return dynamic array with the traversal
