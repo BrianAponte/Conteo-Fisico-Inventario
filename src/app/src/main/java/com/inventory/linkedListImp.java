@@ -2,7 +2,7 @@ package com.inventory;
 
 import java.util.Random;
 
-class Node<E> {
+class Node<E extends  Comparable<E>> {
 
     E key;
     Node<E> next;
@@ -16,7 +16,7 @@ class Node<E> {
  *
  * @param <E>
  */
-public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
+public class linkedListImp<E extends  Comparable<E>> implements Comparable<linkedListImp<E>>{
 
     Node<E> head, tail;
     int len;
@@ -97,6 +97,16 @@ public class linkedListImp<E> implements Comparable<linkedListImp<E>>{
             tail = n;
         }
         len++;
+    }
+
+    public D_ArrayImp<E> getAsArray(){
+        Node<E> current = head;
+        D_ArrayImp<E> arr = new D_ArrayImp<>();
+        while (current != null){
+            arr.add(current.key);
+            current = current.next;
+        }
+        return  arr;
     }
 
     // O(1)

@@ -20,7 +20,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         user_n = intent.getStringExtra("user_name");
         String message = "¡Bienvenido "+user_n+"!";
         user_management user_m = user_management.getInstance();
-        String avl = "Actualmente hay "+user_m.AVLUsers+" usuarios AVL";
+        String avl = "Actualmente hay "+user_m.HashMapUsers+" usuarios MAP";
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.greeting);
         TextView avl_users = findViewById(R.id.avl_users);

@@ -39,14 +39,17 @@ public class MainActivity extends AppCompatActivity {
         }
         um.addUser(new User(1005105349, "Carlos Jimenez", "clave"));*/
 
-        for(long i = 1;i<=100;i++){
+        /*for(long i = 1;i<=100;i++){
             um.addUserAVL(new User(i, "avl", "avl"));
         }
-        /*um.addUserAVL(new User(1005105349 , "Carlos Jimenez" , "clave"));
-        /*for(long i = 0;i<1000;i++){
+        um.addUserAVL(new User(1005105349 , "Carlos Jimenez" , "clave")); */
+    /*
+        for(long i = 0;i<;i++){
             um.addUserHashMap(new User(i,"hm","hm"));
         }
-        um.addUserHashMap(new User(1005105349 , "Carlos Jimenez" ,"clave"));*/
+
+     */
+        //um.addUserHashMap(new User(1005105349 , "Carlos Jimenez" ,"clave"));
     }
 
     public void addUser(View v){
@@ -165,8 +168,8 @@ public class MainActivity extends AppCompatActivity {
                 if(userFound != null) {
                     if(password.matches(userFound.pass)) {
                         Intent intent = new Intent(this, DisplayMessageActivity.class);
-                        String message = "Bienvenido? nop " + userFound.id;
-                        intent.putExtra(EXTRA_MESSAGE, message);
+                        String message = userFound.name;
+                        intent.putExtra("user_name", message);
                         startActivity(intent);
                     }
                     else {
