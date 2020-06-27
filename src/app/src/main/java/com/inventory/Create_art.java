@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class Create_art extends AppCompatActivity {
+
     String user_n;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class Create_art extends AppCompatActivity {
     }
 
     public void addProd(View v) {
+
         art_management a_m = art_management.getInstance();
         TextView success = findViewById(R.id.success_art);
         TextView error = findViewById(R.id.error_art);
@@ -27,6 +29,13 @@ public class Create_art extends AppCompatActivity {
         String category = ((EditText) findViewById(R.id.new_category)).getText().toString();
         String stock = ((EditText) findViewById(R.id.new_stock)).getText().toString();
         String count = ((EditText) findViewById(R.id.new_count)).getText().toString();
+
+        ((EditText) findViewById(R.id.new_sku)).setText("");
+        ((EditText) findViewById(R.id.new_prod)).setText("");
+        ((EditText) findViewById(R.id.new_category)).setText("");
+        ((EditText) findViewById(R.id.new_stock)).setText("");
+        ((EditText) findViewById(R.id.new_count)).setText("");
+
         if(!sku.matches("")&&!name.matches("")&&!category.matches("")&&!stock.matches("")&&!count.matches("")) {
             Product newProd = new Product(sku, name, category, Integer.parseInt(stock), Integer.parseInt(count));
             if(a_m.amount_of_art==0) {

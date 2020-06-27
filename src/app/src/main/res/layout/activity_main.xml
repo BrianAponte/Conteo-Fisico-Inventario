@@ -39,11 +39,11 @@
         android:layout_height="70dp"
         app:layout_constraintBottom_toTopOf="@+id/UserId"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.743"
-        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+        app:layout_constraintVertical_bias="0.794"
+        app:srcCompat="@android:drawable/ic_menu_mapmode" />
 
     <TextView
         android:id="@+id/create_user_tv"
@@ -77,14 +77,13 @@
         android:id="@+id/Password"
         android:layout_width="215dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="52dp"
         android:ems="10"
         android:hint="@string/pass"
         android:inputType="textPassword"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/Login_button_da"
+        app:layout_constraintBottom_toTopOf="@+id/login_button_map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -92,37 +91,36 @@
         style="@android:style/Widget.Button"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="28dp"
         android:background="#fff"
         android:onClick="login_da"
         android:text="Entrar D_A"
-        app:layout_constraintBottom_toTopOf="@+id/login_button_avl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/login_button_avl"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginStart="92dp"
         android:onClick="login_avl"
         android:text="ENTRAR AVL"
-        app:layout_constraintBottom_toTopOf="@+id/login_button_map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/Login_button_da"
+        tools:layout_editor_absoluteY="28dp" />
 
     <Button
         android:id="@+id/login_button_map"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="96dp"
         android:onClick="login_map"
         android:text="ENTRAR MAP"
         app:layout_constraintBottom_toTopOf="@+id/error_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -143,6 +141,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="297dp" />
+        app:layout_constraintGuide_begin="324dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

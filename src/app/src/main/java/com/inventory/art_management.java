@@ -2,7 +2,6 @@ package com.inventory;
 
 public class art_management {
     private static art_management myInstance = null;
-
     AVLTreeImp<Product> articulos;
     int amount_of_art;
 

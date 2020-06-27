@@ -16,12 +16,14 @@ public class View_art extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_art);
+
         Intent intent = getIntent();
         user_n = intent.getStringExtra("user_name");
 
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
         am = art_management.getInstance();
         D_ArrayImp<Product> prods = am.getArt();
+
         for(int i=0;i<prods.getLen();i++) {
             final String product = prods.get(i).name;
             TextView tv = new TextView(this);
