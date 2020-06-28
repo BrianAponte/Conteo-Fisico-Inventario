@@ -4,19 +4,159 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Art_details extends AppCompatActivity {
-    String prod;
+    String prod_name;
+    Product prod;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_art_details);
 
         Intent i = getIntent();
-        prod = i.getStringExtra("prod_name");
+        prod_name = i.getStringExtra("prod_name");
 
-        TextView tv = (TextView) findViewById(R.id.art_name);
-        tv.setText(prod);
+        art_management am = art_management.getInstance();
+        prod = am.findProd(new Product("", prod_name, "", 0, 0));
+
+        displayProdCharacteristics();
+    }
+
+    public void modifyArt(View v) {
+        TextView success = findViewById(R.id.success_am);
+        TextView error = findViewById(R.id.error_am);
+        success.setVisibility(View.INVISIBLE);
+        error.setVisibility(View.INVISIBLE);
+
+        TextView edit = (TextView) findViewById(R.id.edit);
+        edit.setVisibility(View.INVISIBLE);
+        edit.setClickable(false);
+        TextView discard = (TextView) findViewById(R.id.discard);
+        discard.setVisibility(View.VISIBLE);
+        discard.setClickable(true);
+        TextView confirm = (TextView) findViewById(R.id.confirm);
+        confirm.setVisibility(View.VISIBLE);
+        confirm.setClickable(true);
+
+        EditText sku_edit = (EditText) findViewById(R.id.sku_edtx);
+        sku_edit.setEnabled(true);
+        EditText name_edit = (EditText) findViewById(R.id.name_edtx);
+        name_edit.setEnabled(true);
+        EditText category_edit = (EditText) findViewById(R.id.category_edtx);
+        category_edit.setEnabled(true);
+        EditText stock_edit = (EditText) findViewById(R.id.stock_edtx);
+        stock_edit.setEnabled(true);
+        EditText count_edit = (EditText) findViewById(R.id.count_edtx);
+        count_edit.setEnabled(true);
+    }
+
+    public void saveArtChanges(View v) {
+        EditText sku_edit = (EditText) findViewById(R.id.sku_edtx);
+        EditText name_edit = (EditText) findViewById(R.id.name_edtx);
+        EditText category_edit = (EditText) findViewById(R.id.category_edtx);
+        EditText stock_edit = (EditText) findViewById(R.id.stock_edtx);
+        EditText count_edit = (EditText) findViewById(R.id.count_edtx);
+
+        String sku = sku_edit.getText().toString();
+        String name = name_edit.getText().toString();
+        String category = category_edit.getText().toString();
+        String stock = stock_edit.getText().toString();
+        String count = count_edit.getText().toString();
+        TextView success = findViewById(R.id.success_am);
+        TextView error = findViewById(R.id.error_am);
+
+        if(!sku.matches("")&&!name.matches("")&&!category.matches("")
+                &&!stock.matches("")&&!count.matches("")) {
+            if(isAlph(name)) {
+                prod.sku = sku;
+                prod.name = name;
+                prod.category = category;
+                prod.stock = Integer.parseInt(stock);
+                prod.counted = Integer.parseInt(count);
+                error.setVisibility(View.INVISIBLE);
+                success.setVisibility(View.VISIBLE);
+            }
+            else {
+                success.setVisibility(View.INVISIBLE);
+                error.setText("El nombre sólo puede contener caracteres alfabéticos y espacios");
+                error.setVisibility(View.VISIBLE);
+            }
+
+        }
+        else {
+            success.setVisibility(View.INVISIBLE);
+            error.setText("Rellene todos los campos");
+            error.setVisibility(View.VISIBLE);
+        }
+
+        sku_edit.setEnabled(false);
+        name_edit.setEnabled(false);
+        category_edit.setEnabled(false);
+        stock_edit.setEnabled(false);
+        count_edit.setEnabled(false);
+
+        TextView edit = (TextView) findViewById(R.id.edit);
+        edit.setVisibility(View.VISIBLE);
+        edit.setClickable(true);
+        TextView discard = (TextView) findViewById(R.id.discard);
+        discard.setVisibility(View.INVISIBLE);
+        discard.setClickable(false);
+        TextView confirm = (TextView) findViewById(R.id.confirm);
+        confirm.setVisibility(View.INVISIBLE);
+        confirm.setClickable(false);
+
+        displayProdCharacteristics();
+
+    }
+
+    public void discardArtChanges(View v) {
+        TextView edit = (TextView) findViewById(R.id.edit);
+        edit.setVisibility(View.VISIBLE);
+        edit.setClickable(true);
+        TextView discard = (TextView) findViewById(R.id.discard);
+        discard.setVisibility(View.INVISIBLE);
+        discard.setClickable(false);
+        TextView confirm = (TextView) findViewById(R.id.confirm);
+        confirm.setVisibility(View.INVISIBLE);
+        confirm.setClickable(false);
+
+        EditText sku_edit = (EditText) findViewById(R.id.sku_edtx);
+        sku_edit.setEnabled(false);
+        EditText name_edit = (EditText) findViewById(R.id.name_edtx);
+        name_edit.setEnabled(false);
+        EditText category_edit = (EditText) findViewById(R.id.category_edtx);
+        category_edit.setEnabled(false);
+        EditText stock_edit = (EditText) findViewById(R.id.stock_edtx);
+        stock_edit.setEnabled(false);
+        EditText count_edit = (EditText) findViewById(R.id.count_edtx);
+        count_edit.setEnabled(false);
+
+        displayProdCharacteristics();
+    }
+
+    public void displayProdCharacteristics() {
+        EditText sku_edit = (EditText) findViewById(R.id.sku_edtx);
+        EditText name_edit = (EditText) findViewById(R.id.name_edtx);
+        EditText category_edit = (EditText) findViewById(R.id.category_edtx);
+        EditText stock_edit = (EditText) findViewById(R.id.stock_edtx);
+        EditText count_edit = (EditText) findViewById(R.id.count_edtx);
+        sku_edit.setText(prod.sku);
+        name_edit.setText(prod.name);
+        category_edit.setText(prod.category);
+        stock_edit.setText(Integer.toString(prod.stock));
+        count_edit.setText(Integer.toString(prod.counted));
+    }
+
+    public boolean isAlph(String s) {
+        char[] chars = s.toCharArray();
+        for(char c:chars) {
+            if(!Character.isAlphabetic(c)&&c!=' ') {
+                return false;
+            }
+        }
+        return true;
     }
 }

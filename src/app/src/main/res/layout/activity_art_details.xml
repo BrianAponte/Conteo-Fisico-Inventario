@@ -8,26 +8,213 @@
     tools:context=".Art_details">
 
     <TextView
-        android:id="@+id/art_name"
+        android:id="@+id/error_am"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="520dp"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/success_art"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/success_am"
+        android:layout_width="245dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="124dp"
+        android:text="Artículo modificado correctamente"
+        android:textColor="#29C829"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/confirm"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/confirm"
+        android:layout_width="68dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="620dp"
+        android:clickable="false"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_correct"
+        android:onClick="saveArtChanges"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="672dp"
+        android:clickable="true"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_pencil"
+        android:onClick="modifyArt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.884"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/discard"
+        android:layout_width="46dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="628dp"
+        android:clickable="false"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_cerrar"
+        android:onClick="discardArtChanges"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.679"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/art_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detalles del Producto"
         android:textColor="#73BADA"
-        android:textSize="24sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.066" />
 
+    <EditText
+        android:id="@+id/count_edtx"
+        android:layout_width="201dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="456dp"
+        android:layout_marginEnd="60dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/edit"
-        android:layout_width="64dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:drawableTint="#10D818"
-        android:foreground="@android:drawable/ic_menu_edit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="468dp"
+        android:text="Conteo:"
+        android:textColor="#73BADA"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/count_edtx"
+        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="316dp"
+        android:text="Categoría:"
+        android:textColor="#73BADA"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/category_edtx"
+        app:layout_constraintHorizontal_bias="0.614"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="236dp"
+        android:text="Nombre:"
+        android:textColor="#73BADA"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/name_edtx"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/name_edtx"
+        android:layout_width="201dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="228dp"
+        android:layout_marginEnd="56dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/sku_edtx"
+        android:layout_width="201dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="156dp"
+        android:layout_marginEnd="96dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/category_edtx"
+        android:layout_width="201dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="304dp"
+        android:layout_marginEnd="44dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="392dp"
+        android:text="Stock:"
+        android:textColor="#73BADA"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/stock_edtx"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="168dp"
+        android:text="SKU:"
+        android:textColor="#73BADA"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/sku_edtx"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/stock_edtx"
+        android:layout_width="201dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginEnd="80dp"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

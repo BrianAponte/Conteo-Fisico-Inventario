@@ -21,8 +21,9 @@ public class inventoryManagement {
         return myInstance;
     }
 
-    public void addInventory() throws Throwable {
+    public void addInventory() {
         inventarios.add(new Inventory(inventoryNumber, new AVLTreeImp<Product>()));
         inventoryNumber++;
+        amount_of_inventories++;
     }
 }

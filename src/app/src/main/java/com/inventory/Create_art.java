@@ -36,28 +36,37 @@ public class Create_art extends AppCompatActivity {
         ((EditText) findViewById(R.id.new_stock)).setText("");
         ((EditText) findViewById(R.id.new_count)).setText("");
 
-        if(!sku.matches("")&&!name.matches("")&&!category.matches("")&&!stock.matches("")&&!count.matches("")) {
-            Product newProd = new Product(sku, name, category, Integer.parseInt(stock), Integer.parseInt(count));
-            if(a_m.amount_of_art==0) {
-                a_m.add_art(newProd);
-                error.setVisibility(View.INVISIBLE);
-                success.setText("Producto añadido, actualmente hay "+a_m.amount_of_art +" productos");
-                success.setVisibility(View.VISIBLE);
-            }
-            else {
-                Product productFound = a_m.findProd(newProd);
-                if(productFound==null||!productFound.name.matches(name)) {
+        if(!sku.matches("")&&!name.matches("")&&!category.matches("")
+                &&!stock.matches("")&&!count.matches("")) {
+            if(isAlph(name)) {
+                Product newProd = new Product(sku, name, category, Integer.parseInt(stock), Integer.parseInt(count));
+                if(a_m.amount_of_art==0) {
                     a_m.add_art(newProd);
                     error.setVisibility(View.INVISIBLE);
                     success.setText("Producto añadido, actualmente hay "+a_m.amount_of_art +" productos");
                     success.setVisibility(View.VISIBLE);
                 }
                 else {
-                    success.setVisibility(View.INVISIBLE);
-                    error.setText("Nombre de artículo ya registrado");
-                    error.setVisibility(View.VISIBLE);
+                    Product productFound = a_m.findProd(newProd);
+                    if(productFound==null||!productFound.name.matches(name)) {
+                        a_m.add_art(newProd);
+                        error.setVisibility(View.INVISIBLE);
+                        success.setText("Producto añadido, actualmente hay "+a_m.amount_of_art +" productos");
+                        success.setVisibility(View.VISIBLE);
+                    }
+                    else {
+                        success.setVisibility(View.INVISIBLE);
+                        error.setText("Nombre de artículo ya registrado");
+                        error.setVisibility(View.VISIBLE);
+                    }
                 }
             }
+            else {
+                success.setVisibility(View.INVISIBLE);
+                error.setText("El nombre sólo puede contener caracteres alfabéticos y espacios");
+                error.setVisibility(View.VISIBLE);
+            }
+
         }
         else {
             success.setVisibility(View.INVISIBLE);
@@ -70,5 +79,15 @@ public class Create_art extends AppCompatActivity {
         Intent i = new Intent(this, DisplayMessageActivity.class);
         i.putExtra("user_name", user_n);
         startActivity(i);
+    }
+
+    public boolean isAlph(String s) {
+        char[] chars = s.toCharArray();
+        for(char c:chars) {
+            if(!Character.isAlphabetic(c)&&c!=' ') {
+                return false;
+            }
+        }
+        return true;
     }
 }

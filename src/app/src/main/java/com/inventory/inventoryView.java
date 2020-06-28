@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,10 +23,10 @@ public class inventoryView extends AppCompatActivity {
 
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
         im = inventoryManagement.getInstance();
+        displayInv();
 
-        D_ArrayImp<Inventory> inventories = im.inventarios;
 
-        for (int i = 0 ; i<inventories.getLen();i++){
+        /*for (int i = 0 ; i<inventories.getLen();i++){
             int id = inventories.get(i).id;
             TextView tv = new TextView(this);
             tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -41,15 +42,56 @@ public class inventoryView extends AppCompatActivity {
                 }
             });
             myLayout.addView(tv);
-        }
+        }*/
     }
 
 
     public void addInventory(View v) throws Throwable {
-        inventoryManagement im = inventoryManagement.getInstance();
+        LinearLayout myLayout = (LinearLayout) findViewById(R.id.inv_layout);
+        myLayout.removeAllViews();
         im.addInventory();
-        startActivity(getIntent());
-        //this.onCreate();
+        displayInv();
+    }
+
+    public void displayInv(){
+        LinearLayout myLayout = (LinearLayout) findViewById(R.id.inv_layout);
+        D_ArrayImp<Inventory> inv = inventoryManagement.getInstance().inventarios;
+
+        for(int i=0;i<inv.getLen();i++) {
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setGravity(View.TEXT_ALIGNMENT_CENTER);
+            final int id = inv.get(i).id;
+            final String inv_m = "Inventario "+id;
+            TextView tv = new TextView(this);
+            ImageButton im = new ImageButton(this);
+            LinearLayout.LayoutParams lay_params =new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            tv.setLayoutParams(lay_params);
+            tv.setText(inv_m);
+            tv.setTextSize(24);
+            tv.setWidth(650);
+            tv.setHeight(110);
+            tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+            im.setImageResource(R.drawable.ic_add);
+            im.setBackgroundColor(0);
+            lay_params.height = 110;
+            im.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(inventoryView.this, inventoryDetails.class);
+                    intent.putExtra("inv_id", id);
+                    startActivity(intent);
+                }
+            });
+            row.addView(tv);
+            lay_params.setMargins(20, 0, 0, 0);
+            row.addView(im, lay_params);
+            myLayout.addView(row);
+        }
+
     }
 }
 

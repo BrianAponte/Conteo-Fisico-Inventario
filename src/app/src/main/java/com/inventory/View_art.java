@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,30 +25,13 @@ public class View_art extends AppCompatActivity {
         am = art_management.getInstance();
         D_ArrayImp<Product> prods = am.getArt();
 
-        for(int i=0;i<prods.getLen();i++) {
-            final String product = prods.get(i).name;
-            TextView tv = new TextView(this);
-            tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            tv.setText(product);
-            tv.setTextSize(20);
-            tv.setClickable(true);
-            tv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(View_art.this, Art_details.class);
-                    intent.putExtra("prod_name", product);
-                    startActivity(intent);
-                }
-            });
-            myLayout.addView(tv);
-        }
+        displayProds(prods);
     }
 
     public boolean isAlph(String s) {
         char[] chars = s.toCharArray();
         for(char c:chars) {
-            if(!Character.isAlphabetic(c)) {
+            if(!Character.isAlphabetic(c)&&c!=' ') {
                 return false;
             }
         }
@@ -62,7 +46,6 @@ public class View_art extends AppCompatActivity {
         boolean doFilter;
 
         if(filter.matches("")) {
-            System.out.print("dunno bro");
             error.setVisibility(View.INVISIBLE);
             filtered = am.getArt();
             doFilter = true;
@@ -81,26 +64,48 @@ public class View_art extends AppCompatActivity {
         if(doFilter) {
             LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
             myLayout.removeAllViews();
-            for(int i=0;i<filtered.getLen();i++) {
-                final String product = filtered.get(i).name;
-                TextView tv = new TextView(this);
-                tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT));
-                tv.setText(product);
-                tv.setTextSize(20);
-                tv.setClickable(true);
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(View_art.this, Art_details.class);
-                        intent.putExtra("prod_name", product);
-                        startActivity(intent);
-                    }
-                });
-                myLayout.addView(tv);
-            }
+            displayProds(filtered);
         }
 
+    }
+
+    public void displayProds(D_ArrayImp<Product> prods) {
+        LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
+
+        for(int i=0;i<prods.getLen();i++) {
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+            final String product = prods.get(i).name;
+            TextView tv = new TextView(this);
+            ImageButton im = new ImageButton(this);
+            LinearLayout.LayoutParams lay_params =new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            tv.setLayoutParams(lay_params);
+            tv.setText(product);
+            tv.setTextSize(24);
+            tv.setWidth(650);
+            tv.setHeight(110);
+            tv.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
+            im.setImageResource(R.drawable.ic_add);
+            im.setBackgroundColor(0);
+            lay_params.height = 110;
+            im.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(View_art.this, Art_details.class);
+                    intent.putExtra("prod_name", product);
+                    startActivity(intent);
+                }
+            });
+            row.addView(tv);
+            lay_params.setMargins(20, 0, 0, 0);
+            row.addView(im, lay_params);
+            myLayout.addView(row);
+        }
     }
 
     public void back_view(View v) {
