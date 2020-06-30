@@ -82,6 +82,7 @@
         android:hint="@string/pass"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:textColorLink="#E81123"
         app:layout_constraintBottom_toTopOf="@+id/login_button_map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -96,6 +97,7 @@
         android:inputType="number"
         android:textAlignment="center"
         android:textColor="#000000"
+        android:textColorLink="#E81123"
         app:layout_constraintBottom_toTopOf="@+id/Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
