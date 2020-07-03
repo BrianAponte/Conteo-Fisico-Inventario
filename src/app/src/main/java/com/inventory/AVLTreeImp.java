@@ -105,6 +105,8 @@ public class AVLTreeImp<T extends Comparable<T>>{
     }
 
     private void updateHeights(AVLNode node) {
+        if(node == null) {return;}
+
         if(node.leftChild==null) {
             if(node.rightChild ==null) {
                 node.height=1;
@@ -406,6 +408,22 @@ public class AVLTreeImp<T extends Comparable<T>>{
            }
        }
     }
+
+    /**
+     * Changes the specified old data for the new one
+     * @param oldData data to change
+     * @param newData new value of that data
+     */
+    public void update(T oldData, T newData) {
+        AVLNode foundData = find(oldData);
+        //If the data specified is not in the tree we do nothing
+        if(foundData.data.compareTo(oldData)!=0) {return;}
+        //If it´s in there just by deleting it and then inserting the new data the task
+        //would be done
+        delete(foundData);
+        insert(newData);
+    }
+
     /**
      * Returns a D_ArrayImp (dynamic array) with all the data that's between a specified range
      * @param rangeStart Start of the range

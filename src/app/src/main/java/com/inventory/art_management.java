@@ -65,4 +65,8 @@ public class art_management {
             }
         }
     }
+
+    public void updateArt(Product oldArt, Product newArt) {
+        articulos.update(oldArt, newArt);
+    }
 }

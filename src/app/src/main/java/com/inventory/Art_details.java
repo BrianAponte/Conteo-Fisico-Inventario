@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class Art_details extends AppCompatActivity {
     String prod_name;
     Product prod;
+    art_management am;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,7 @@ public class Art_details extends AppCompatActivity {
         Intent i = getIntent();
         prod_name = i.getStringExtra("prod_name");
 
-        art_management am = art_management.getInstance();
+        am = art_management.getInstance();
         prod = am.findProd(new Product("", prod_name, "", 0, 0));
 
         displayProdCharacteristics();
@@ -71,11 +72,20 @@ public class Art_details extends AppCompatActivity {
         if(!sku.matches("")&&!name.matches("")&&!category.matches("")
                 &&!stock.matches("")&&!count.matches("")) {
             if(isAlph(name)) {
-                prod.sku = sku;
-                prod.name = name;
-                prod.category = category;
-                prod.stock = Integer.parseInt(stock);
-                prod.counted = Integer.parseInt(count);
+
+                if(name.matches(prod_name)) {
+                    prod.sku = sku;
+                    prod.category = category;
+                    prod.stock = Integer.parseInt(stock);
+                    prod.counted = Integer.parseInt(count);
+                }
+                else {
+                    Product newProd = new Product(sku, name, category, Integer.parseInt(stock), Integer.parseInt(count));
+                    am.updateArt(prod, newProd);
+                    prod = newProd;
+                    prod_name = name;
+                }
+
                 error.setVisibility(View.INVISIBLE);
                 success.setVisibility(View.VISIBLE);
             }
@@ -158,5 +168,10 @@ public class Art_details extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public void backToArt(View v) {
+        Intent i = new Intent(this, View_art.class);
+        startActivity(i);
     }
 }

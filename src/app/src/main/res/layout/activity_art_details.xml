@@ -8,6 +8,20 @@
     tools:context=".Art_details">
 
     <TextView
+        android:id="@+id/back_art"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="672dp"
+        android:clickable="true"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_regreso"
+        android:onClick="backToArt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/error_am"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
