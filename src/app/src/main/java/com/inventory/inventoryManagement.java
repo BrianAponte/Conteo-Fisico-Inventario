@@ -3,13 +3,12 @@ package com.inventory;
 import android.content.Intent;
 
 public class inventoryManagement {
-    int inventoryNumber;
+
     private static inventoryManagement myInstance = null;
     D_ArrayImp<Inventory> inventarios;
     int amount_of_inventories;
 
     public inventoryManagement(){
-        inventoryNumber = 1;
         inventarios = new D_ArrayImp<>();
         amount_of_inventories = 0;
     }
@@ -22,8 +21,7 @@ public class inventoryManagement {
     }
 
     public void addInventory() {
-        inventarios.add(new Inventory(inventoryNumber, new AVLTreeImp<Product>()));
-        inventoryNumber++;
         amount_of_inventories++;
+        inventarios.add(new Inventory(amount_of_inventories));
     }
 }

@@ -11,17 +11,19 @@ import android.widget.TextView;
 public class Create_art extends AppCompatActivity {
 
     String user_n;
+    int inventoryId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_art);
         Intent intent = getIntent();
         user_n = intent.getStringExtra("user_name");
+        inventoryId = intent.getIntExtra("inventory_id", 1);
     }
 
     public void addProd(View v) {
 
-        art_management a_m = art_management.getInstance();
+        inventoryManagement i_m = inventoryManagement.getInstance();
         TextView success = findViewById(R.id.success_art);
         TextView error = findViewById(R.id.error_art);
         String sku = ((EditText) findViewById(R.id.new_sku)).getText().toString();
@@ -40,6 +42,7 @@ public class Create_art extends AppCompatActivity {
                 &&!stock.matches("")&&!count.matches("")) {
             if(isAlph(name)) {
                 Product newProd = new Product(sku, name, category, Integer.parseInt(stock), Integer.parseInt(count));
+                art_management a_m = i_m.inventarios.get(inventoryId-1).products;
                 if(a_m.amount_of_art==0) {
                     a_m.add_art(newProd);
                     error.setVisibility(View.INVISIBLE);
@@ -76,8 +79,9 @@ public class Create_art extends AppCompatActivity {
     }
 
     public void go_back(View v){
-        Intent i = new Intent(this, DisplayMessageActivity.class);
+        Intent i = new Intent(this, inventoryDetails.class);
         i.putExtra("user_name", user_n);
+        i.putExtra("inventory_id", inventoryId);
         startActivity(i);
     }
 

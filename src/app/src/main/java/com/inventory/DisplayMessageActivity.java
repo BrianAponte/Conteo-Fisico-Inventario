@@ -33,16 +33,4 @@ public class DisplayMessageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void createArt(View v) {
-        Intent intent = new Intent(this, Create_art.class);
-        intent.putExtra("user_name", user_n);
-        startActivity(intent);
-    }
-
-    public void showArt(View v) {
-        Intent intent = new Intent(this, View_art.class);
-        intent.putExtra("user_name", user_n);
-        startActivity(intent);
-    }
-
 }

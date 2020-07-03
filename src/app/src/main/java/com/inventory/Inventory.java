@@ -7,17 +7,17 @@ public class Inventory implements Comparable<Inventory> {
 
     int id;
     //Date date;
-    AVLTreeImp<Product> products;
+    art_management products;
     //ArrayList<Product> products;
 
-    public Inventory(int id, AVLTreeImp<Product> products) {
+    public Inventory(int id) {
         this.id = id;
         //this.date = date;
-        this.products = products;
+        this.products = new art_management();
     }
 
     public void addProduct(Product newProduct){
-        this.products.insert(newProduct);
+        this.products.add_art(newProduct);
     }
 
     @Override

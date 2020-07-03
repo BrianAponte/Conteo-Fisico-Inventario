@@ -13,6 +13,7 @@ import android.widget.TextView;
 public class View_art extends AppCompatActivity {
     String user_n;
     art_management am;
+    int inventoryId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,9 +21,10 @@ public class View_art extends AppCompatActivity {
 
         Intent intent = getIntent();
         user_n = intent.getStringExtra("user_name");
+        inventoryId = intent.getIntExtra("inventory_id", 1);
 
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
-        am = art_management.getInstance();
+        am = inventoryManagement.getInstance().inventarios.get(inventoryId-1).products;
         D_ArrayImp<Product> prods = am.getArt();
 
         displayProds(prods);
@@ -98,6 +100,7 @@ public class View_art extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(View_art.this, Art_details.class);
                     intent.putExtra("prod_name", product);
+                    intent.putExtra("inventory_id", inventoryId);
                     startActivity(intent);
                 }
             });
@@ -109,8 +112,9 @@ public class View_art extends AppCompatActivity {
     }
 
     public void back_view(View v) {
-        Intent i = new Intent(this, DisplayMessageActivity.class);
+        Intent i = new Intent(this, inventoryDetails.class);
         i.putExtra("user_name", user_n);
+        i.putExtra("inventory_id", inventoryId);
         startActivity(i);
     }
 }

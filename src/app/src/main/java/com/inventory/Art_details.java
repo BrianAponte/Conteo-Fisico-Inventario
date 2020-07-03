@@ -12,6 +12,7 @@ public class Art_details extends AppCompatActivity {
     String prod_name;
     Product prod;
     art_management am;
+    int inventoryId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,8 +20,9 @@ public class Art_details extends AppCompatActivity {
 
         Intent i = getIntent();
         prod_name = i.getStringExtra("prod_name");
+        inventoryId = i.getIntExtra("inventory_id", 1);
 
-        am = art_management.getInstance();
+        am = inventoryManagement.getInstance().inventarios.get(inventoryId-1).products;
         prod = am.findProd(new Product("", prod_name, "", 0, 0));
 
         displayProdCharacteristics();

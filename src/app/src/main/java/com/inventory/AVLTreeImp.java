@@ -299,10 +299,20 @@ public class AVLTreeImp<T extends Comparable<T>>{
                 }
 
                 if(node.data.compareTo(root.data)>0) {
-                    updateRHeight();
+                    if(root.rightChild!=null) {
+                        updateRHeight();
+                    }
+                    else {
+                        updateHeights(root);
+                    }
                 }
                 else{
-                    updateLHeight();
+                    if(root.leftChild!=null) {
+                        updateLHeight();
+                    }
+                    else {
+                        updateHeights(root);
+                    }
                 }
                 balance(node.parent);
            }
@@ -323,10 +333,20 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     }
 
                     if(node.data.compareTo(root.data)>0) {
-                        updateRHeight();
+                        if(root.rightChild!=null) {
+                            updateRHeight();
+                        }
+                        else {
+                            updateHeights(root);
+                        }
                     }
                     else{
-                        updateLHeight();
+                        if(root.leftChild!=null) {
+                            updateLHeight();
+                        }
+                        else {
+                            updateHeights(root);
+                        }
                     }
                     balance(node.parent);
                }
@@ -356,10 +376,20 @@ public class AVLTreeImp<T extends Comparable<T>>{
                         }
 
                         if(node.data.compareTo(root.data)<0) {
-                            updateLHeight();
+                            if(root.leftChild!=null) {
+                                updateLHeight();
+                            }
+                            else {
+                                updateHeights(root);
+                            }
                         }
                         else{
-                            updateRHeight();
+                            if(root.rightChild!=null) {
+                                updateRHeight();
+                            }
+                            else {
+                                updateHeights(root);
+                            }
                         }
                         balance(next);
                     }
@@ -398,10 +428,20 @@ public class AVLTreeImp<T extends Comparable<T>>{
                     
 
                     if(node.data.compareTo(root.data)<0) {
-                        updateLHeight();
+                        if(root.leftChild!=null) {
+                            updateLHeight();
+                        }
+                        else {
+                            updateHeights(root);
+                        }
                     }
                     else{
-                        updateRHeight();
+                        if(root.rightChild!=null) {
+                            updateRHeight();
+                        }
+                        else {
+                            updateHeights(root);
+                        }
                     }
                     balance(possUnbalanced);
                 }       
