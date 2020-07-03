@@ -45,7 +45,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         app:layout_constraintVertical_bias="0.084"
-        app:srcCompat="@android:mipmap/sym_def_app_icon" />
+        app:srcCompat="@drawable/ic_persona"
+        tools:srcCompat="@drawable/ic_persona" />
 
     <EditText
         android:id="@+id/create_password"
@@ -105,6 +106,7 @@
         android:text="Crear DA"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#000000"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/create_user_button_map"
         app:layout_constraintHorizontal_bias="0.904"
@@ -121,6 +123,7 @@
         android:text="Crear AVL"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:textColor="#000000"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/create_user_button_da"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
@@ -130,14 +133,16 @@
         android:id="@+id/create_user_button_map"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
+        android:backgroundTint="#3D5970"
         android:onClick="addUser_hashmap"
-        android:shadowColor="#B5AEAE"
-        android:text="Crear MAP"
+        android:shadowColor="#3D5970"
+        android:text="CREAR"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2"
         app:layout_constraintVertical_bias="0.172" />
 
@@ -180,8 +185,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
+        android:fontFamily="sans-serif-medium"
         android:text="Crear Usuario"
-        android:textColor="#73BADA"
+        android:textColor="#5B7F9C"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
