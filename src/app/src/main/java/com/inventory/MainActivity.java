@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         um.addUserAVL(new User(1005105349 , "Carlos Jimenez" , "clave")); */
 
         for(long i = 0;i<1000;i++){
-            um.addUserHashMap(new User(i,"hm","hm"));
+            um.addUserHashMap(new User(i,"hm","hm", true));
         }
 
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void addUser(View v){
         Intent intent = new Intent(this, createUser.class);
+        intent.putExtra("has_perms", true);
         startActivity(intent);
     }
 
@@ -76,10 +77,17 @@ public class MainActivity extends AppCompatActivity {
                     if(u.id == user){
                         if(u.pass.matches(password)){
                             //user exists and uN and Pass are ok
-                            Intent intent = new Intent(this, DisplayMessageActivity.class);
-                            
-                            intent.putExtra("user_name", u.name);
-                            startActivity(intent);
+                            if(u.hasPerms) {
+                                Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+                                intent.putExtra("user_name", u.name);
+                                startActivity(intent);
+                            }
+                            else {
+                                Intent intent = new Intent(this, inventoryView.class);
+                                startActivity(intent);
+                            }
+
                         } else {
                             //contraseña incorrecta
                             error.setText("Contraseña incorrecta");
@@ -119,12 +127,19 @@ public class MainActivity extends AppCompatActivity {
             user_management user_m = user_management.getInstance();
 
             if(user_m.AVLUsers!=0){
-                User userFound = user_m.findAVL(new User(user, "", password));
+                User userFound = user_m.findAVL(new User(user, "", password, false));
                 if(user==userFound.id) {
                     if(password.matches(userFound.pass)) {
-                        Intent intent = new Intent(this, DisplayMessageActivity.class);
-                        intent.putExtra("user_name", userFound.name);
-                        startActivity(intent);
+                        if(userFound.hasPerms) {
+                            Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+                            intent.putExtra("user_name", userFound.name);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(this, inventoryView.class);
+                            startActivity(intent);
+                        }
                     }
                     else {
                         error.setText("Contraseña incorrecta");
@@ -164,13 +179,20 @@ public class MainActivity extends AppCompatActivity {
             user_management user_m = user_management.getInstance();
             System.out.println(user_m.HashMapUsers);
             if(user_m.HashMapUsers != 0){
-                User userFound = user_m.findHashMap(new User(user, "", password));
+                User userFound = user_m.findHashMap(new User(user, "", password, false));
                 if(userFound != null) {
                     if(password.matches(userFound.pass)) {
-                        Intent intent = new Intent(this, DisplayMessageActivity.class);
-                        String message = userFound.name;
-                        intent.putExtra("user_name", message);
-                        startActivity(intent);
+                        if(userFound.hasPerms) {
+                            Intent intent = new Intent(this, DisplayMessageActivity.class);
+
+                            intent.putExtra("user_name", userFound.name);
+                            intent.putExtra("admin_id", user);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(this, inventoryView.class);
+                            startActivity(intent);
+                        }
                     }
                     else {
                         error.setText("Contraseña incorrecta" + "  Time: " + (System.nanoTime() - startTime));

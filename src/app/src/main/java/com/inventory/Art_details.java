@@ -174,6 +174,14 @@ public class Art_details extends AppCompatActivity {
 
     public void backToArt(View v) {
         Intent i = new Intent(this, View_art.class);
+        i.putExtra("inventory_id", inventoryId);
+        startActivity(i);
+    }
+
+    public void deleteArt(View v) {
+        am.deleteArt(prod);
+        Intent i = new Intent(this, View_art.class);
+        i.putExtra("inventory_id", inventoryId);
         startActivity(i);
     }
 }

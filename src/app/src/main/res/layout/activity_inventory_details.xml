@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".inventoryDetails">
 
+    <Button
+        android:id="@+id/back_inv"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="264dp"
+        android:layout_marginBottom="84dp"
+        android:backgroundTint="#3D5970"
+        android:onClick="backToInv"
+        android:shadowColor="#FFFFFF"
+        android:text="VOLVER"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/error_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"

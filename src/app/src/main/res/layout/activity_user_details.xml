@@ -4,103 +4,88 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foreground="@android:drawable/divider_horizontal_dark"
-    tools:context=".Art_details">
+    tools:context=".user_details">
 
     <TextView
-        android:id="@+id/delete_ar"
-        android:layout_width="64dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="672dp"
-        android:clickable="true"
-        android:drawableTint="#10D818"
-        android:foreground="@drawable/ic_eliminar"
-        android:onClick="deleteArt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.613"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/back_art"
-        android:layout_width="64dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="672dp"
-        android:clickable="true"
-        android:drawableTint="#10D818"
-        android:foreground="@drawable/ic_regreso"
-        android:onClick="backToArt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/error_am"
+        android:id="@+id/error_ud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
+        android:layout_marginTop="456dp"
         android:textColor="#FF0000"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/success_art"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/success_am"
+        android:id="@+id/success_ud"
         android:layout_width="245dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="124dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="192dp"
         android:text="Artículo modificado correctamente"
         android:textColor="#29C829"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/confirm"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/confirm"
-        android:layout_width="68dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="620dp"
-        android:clickable="false"
+        android:id="@+id/back_u"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="600dp"
+        android:clickable="true"
         android:drawableTint="#10D818"
-        android:foreground="@drawable/ic_correct"
-        android:onClick="saveArtChanges"
-        android:visibility="invisible"
+        android:foreground="@drawable/ic_regreso"
+        android:onClick="backToUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintHorizontal_bias="0.158"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/edit"
+        android:id="@+id/delete_u"
         android:layout_width="64dp"
         android:layout_height="48dp"
-        android:layout_marginTop="672dp"
+        android:layout_marginTop="600dp"
+        android:clickable="true"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_eliminar"
+        android:onClick="deleteUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.613"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit_ud"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="600dp"
         android:clickable="true"
         android:drawableTint="#10D818"
         android:foreground="@drawable/ic_pencil"
-        android:onClick="modifyArt"
+        android:onClick="modifyUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.884"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/discard"
+        android:id="@+id/discard_ud"
         android:layout_width="46dp"
         android:layout_height="36dp"
-        android:layout_marginTop="628dp"
+        android:layout_marginTop="556dp"
         android:clickable="false"
         android:drawableTint="#10D818"
         android:foreground="@drawable/ic_cerrar"
-        android:onClick="discardArtChanges"
+        android:onClick="discardUserChanges"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.679"
@@ -108,10 +93,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/art_title"
+        android:id="@+id/confirm_ud"
+        android:layout_width="68dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="548dp"
+        android:clickable="false"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_correct"
+        android:onClick="saveUserChanges"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/art_title_u"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detalles del Producto"
+        android:text="Detalles de Usuario"
         android:textColor="#5B7F9C"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -120,37 +120,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.066" />
 
-    <EditText
-        android:id="@+id/count_edtx"
-        android:layout_width="201dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="456dp"
-        android:layout_marginEnd="60dp"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="468dp"
-        android:text="Conteo:"
-        android:textColor="#5B7F9C"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/count_edtx"
-        app:layout_constraintHorizontal_bias="0.537"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="316dp"
-        android:text="Categoría:"
+        android:text="Contraseña:"
         android:textColor="#5B7F9C"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/category_edtx"
@@ -162,6 +138,7 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="236dp"
         android:text="Nombre:"
         android:textColor="#5B7F9C"
@@ -172,11 +149,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/name_edtx"
+        android:id="@+id/username_edtx"
         android:layout_width="201dp"
         android:layout_height="52dp"
         android:layout_marginTop="228dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="64dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
@@ -184,11 +161,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/sku_edtx"
+        android:id="@+id/user_id"
         android:layout_width="201dp"
         android:layout_height="52dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="96dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginEnd="128dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
@@ -196,53 +173,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/category_edtx"
+        android:id="@+id/pass_edtx"
         android:layout_width="201dp"
         android:layout_height="52dp"
-        android:layout_marginTop="304dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginTop="308dp"
+        android:layout_marginEnd="28dp"
         android:ems="10"
         android:enabled="false"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="392dp"
-        android:text="Stock:"
-        android:textColor="#5B7F9C"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toStartOf="@+id/stock_edtx"
-        app:layout_constraintHorizontal_bias="0.546"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="168dp"
-        android:text="SKU:"
+        android:text="ID:"
         android:textColor="#5B7F9C"
         android:textSize="24sp"
         app:layout_constraintEnd_toStartOf="@+id/sku_edtx"
         app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/stock_edtx"
-        android:layout_width="201dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="380dp"
-        android:layout_marginEnd="80dp"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

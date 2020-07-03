@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".inventoryDetails"></activity>
+        <activity android:name=".user_details"></activity>
+        <activity android:name=".UserView" />
+        <activity android:name=".inventoryDetails" />
         <activity android:name=".inventoryView" />
         <activity android:name=".Art_details" />
         <activity android:name=".View_art" />

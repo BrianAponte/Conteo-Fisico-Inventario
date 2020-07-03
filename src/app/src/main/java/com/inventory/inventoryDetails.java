@@ -30,4 +30,9 @@ public class inventoryDetails extends AppCompatActivity {
         intent.putExtra("inventory_id", id);
         startActivity(intent);
     }
+
+    public void backToInv(View v) {
+        Intent intent = new Intent(this, inventoryView.class);
+        startActivity(intent);
+    }
 }

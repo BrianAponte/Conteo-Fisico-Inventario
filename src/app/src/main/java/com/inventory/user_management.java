@@ -64,4 +64,21 @@ public class user_management {
     public String greetAVLUser(User user) {
         return"¡Bienvenido "+findAVL(user).name+"!";
     }
+
+    public D_ArrayImp<User> getInOrderAVL() {
+        return user_tree.getInOrder();
+    }
+
+    public D_ArrayImp<User> filterAVL(long idStart) {
+        User userStart = new User(idStart, "", "", false);
+        if(idStart%10==9) {
+            return user_tree.rangeSearchB(userStart);
+        }
+        User userEnd = new User(idStart+1, "", "", false);
+        return user_tree.rangeSearchN(userStart, userEnd);
+    }
+
+    public void deleteAVL(User userToDel) {
+        user_tree.delete(user_tree.find(userToDel));
+    }
 }

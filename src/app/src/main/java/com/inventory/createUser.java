@@ -13,11 +13,16 @@ import android.widget.TextView;
 public class createUser extends AppCompatActivity {
     Button create_button;
     EditText username_et, password_et,id_et;
+    boolean perms;
+    long adm_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
+
+        Intent i = getIntent();
+        perms = i.getBooleanExtra("has_perms", false);
     }
 
     public void addUser_da(View v){
@@ -29,7 +34,7 @@ public class createUser extends AppCompatActivity {
         long newId = Long.parseLong(id_et.getText().toString());
         String newUserN = username_et.getText().toString();
         String newPass = password_et.getText().toString();
-        User newUser = new User(newId,newUserN,newPass);
+        User newUser = new User(newId,newUserN,newPass, perms);
 
 
         user_management user_m = user_management.getInstance();
@@ -58,7 +63,7 @@ public class createUser extends AppCompatActivity {
         long newId = Long.parseLong(id_et.getText().toString());
         String newUserN = username_et.getText().toString();
         String newPass = password_et.getText().toString();
-        User newUser = new User(newId, newUserN, newPass);
+        User newUser = new User(newId, newUserN, newPass, perms);
         user_management user_m = user_management.getInstance();
         TextView error = findViewById(R.id.create_error);
         TextView success = findViewById(R.id.create_success);
@@ -84,21 +89,42 @@ public class createUser extends AppCompatActivity {
         long newId = Long.parseLong(id_et.getText().toString());
         String newName = username_et.getText().toString();
         String newPass = password_et.getText().toString();
-        User newUser = new User(newId, newName, newPass);
+        User newUser = new User(newId, newName, newPass, perms);
         user_management user_m = user_management.getInstance();
         TextView error = findViewById(R.id.create_error);
         TextView success = findViewById(R.id.create_success);
-        User userFound = user_m.findHashMap(newUser);
-        if(userFound==null||userFound.id!=newId) {
-            user_m.addUserHashMap(newUser);
-            error.setVisibility(View.INVISIBLE);
-            success.setVisibility(View.VISIBLE);
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+
+        if(perms) {
+            User userFound = user_m.findHashMap(newUser);
+            if(userFound==null||userFound.id!=newId) {
+                user_m.addUserHashMap(newUser);
+                error.setVisibility(View.INVISIBLE);
+                success.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+            else {
+                success.setVisibility(View.INVISIBLE);
+                error.setVisibility(View.VISIBLE);
+            }
         }
         else {
-            success.setVisibility(View.INVISIBLE);
-            error.setVisibility(View.VISIBLE);
+            User admin = user_m.findHashMap(new User(adm_id, "", "", true));
+            user_m = admin.user_m;
+
+            User userFound = user_m.findAVL(newUser);
+            if(userFound==null||userFound.id!=newId) {
+                user_m.addUserAVL(newUser);
+                error.setVisibility(View.INVISIBLE);
+                success.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(this, UserView.class);
+                intent.putExtra("admin_id", adm_id);
+                startActivity(intent);
+            }
+            else {
+                success.setVisibility(View.INVISIBLE);
+                error.setVisibility(View.VISIBLE);
+            }
         }
     }
 
