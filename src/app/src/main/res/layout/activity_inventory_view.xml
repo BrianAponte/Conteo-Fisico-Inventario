@@ -7,6 +7,20 @@
     tools:context=".inventoryView">
 
     <TextView
+        android:id="@+id/back_display_message"
+        android:layout_width="64dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:drawableTint="#10D818"
+        android:foreground="@drawable/ic_regreso"
+        android:onClick="backToDisplayMessage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,14 +34,16 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="334dp"
-        android:layout_height="504dp"
+        android:layout_width="343dp"
+        android:layout_height="537dp"
         android:layout_marginTop="32dp"
         android:background="#fff"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:id="@+id/inv_layout"
@@ -46,13 +62,12 @@
         android:id="@+id/add"
         android:layout_width="71dp"
         android:layout_height="68dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:onClick="addInventory"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:layout_constraintVertical_bias="0.369"
         app:srcCompat="@drawable/ic_add_inv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

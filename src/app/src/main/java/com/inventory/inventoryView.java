@@ -18,7 +18,6 @@ public class inventoryView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_view);
-
         Intent intent = getIntent();
 
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
@@ -91,7 +90,12 @@ public class inventoryView extends AppCompatActivity {
             row.addView(im, lay_params);
             myLayout.addView(row);
         }
+    }
 
+    public void backToDisplayMessage(View v) {
+        Intent i = new Intent(this, DisplayMessageActivity.class);
+        i.putExtra("user_name", userN);
+        startActivity(i);
     }
 }
 
