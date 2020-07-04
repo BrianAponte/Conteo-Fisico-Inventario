@@ -1,4 +1,4 @@
-package com.inventory;
+package java.com.inventory;
 
 /**
  * Array based binary min heap

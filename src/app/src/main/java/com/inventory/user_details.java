@@ -1,7 +1,9 @@
 package com.inventory;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -136,10 +138,29 @@ public class user_details extends AppCompatActivity {
     }
 
     public void deleteUser(View v) {
-        um.deleteAVL(user);
-        Intent i = new Intent(this, UserView.class);
-        i.putExtra("admin_id", adm_id);
-        startActivity(i);
+
+        final Intent i = new Intent(this, UserView.class);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("ALERTA");
+        builder.setMessage("¿Seguro deseas eliminar el usuario?")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // TODO: handle the OK
+                        um.deleteAVL(user);
+                        i.putExtra("admin_id", adm_id);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     public boolean isAlph(String s) {

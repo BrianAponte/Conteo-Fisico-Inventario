@@ -1,7 +1,9 @@
 package com.inventory;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -179,9 +181,27 @@ public class Art_details extends AppCompatActivity {
     }
 
     public void deleteArt(View v) {
-        am.deleteArt(prod);
-        Intent i = new Intent(this, View_art.class);
-        i.putExtra("inventory_id", inventoryId);
-        startActivity(i);
+        final Intent i = new Intent(this, View_art.class);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("ALERTA");
+        builder.setMessage("¿Seguro deseas eliminar el artículo?")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // TODO: handle the OK
+                        am.deleteArt(prod);
+                        i.putExtra("inventory_id", inventoryId);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
