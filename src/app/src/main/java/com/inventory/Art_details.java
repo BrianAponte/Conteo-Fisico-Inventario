@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class Art_details extends AppCompatActivity {
-    String prod_name;
+    String prod_name, user_n;
     Product prod;
     art_management am;
     int inventoryId;
@@ -25,9 +25,16 @@ public class Art_details extends AppCompatActivity {
         prod_name = i.getStringExtra("prod_name");
         inventoryId = i.getIntExtra("inventory_id", 1);
         perms = i.getBooleanExtra("has_perms", true);
+        user_n = i.getStringExtra("user_name");
 
         am = inventoryManagement.getInstance().inventarios.get(inventoryId-1).products;
         prod = am.findProd(new Product("", prod_name, "", 0, 0));
+
+        if(!perms) {
+            TextView delete = (TextView) findViewById(R.id.delete_ar);
+            delete.setClickable(false);
+            delete.setVisibility(View.INVISIBLE);
+        }
 
         displayProdCharacteristics();
     }
@@ -48,12 +55,15 @@ public class Art_details extends AppCompatActivity {
         confirm.setVisibility(View.VISIBLE);
         confirm.setClickable(true);
 
-        EditText sku_edit = (EditText) findViewById(R.id.sku_edtx);
-        sku_edit.setEnabled(true);
-        EditText name_edit = (EditText) findViewById(R.id.name_edtx);
-        name_edit.setEnabled(true);
-        EditText category_edit = (EditText) findViewById(R.id.category_edtx);
-        category_edit.setEnabled(true);
+        if(perms) {
+            EditText sku_edit = (EditText) findViewById(R.id.sku_edtx);
+            sku_edit.setEnabled(true);
+            EditText name_edit = (EditText) findViewById(R.id.name_edtx);
+            name_edit.setEnabled(true);
+            EditText category_edit = (EditText) findViewById(R.id.category_edtx);
+            category_edit.setEnabled(true);
+        }
+
         EditText stock_edit = (EditText) findViewById(R.id.stock_edtx);
         stock_edit.setEnabled(true);
         EditText count_edit = (EditText) findViewById(R.id.count_edtx);
@@ -180,6 +190,7 @@ public class Art_details extends AppCompatActivity {
         Intent i = new Intent(this, View_art.class);
         i.putExtra("inventory_id", inventoryId);
         i.putExtra("has_perms", perms);
+        i.putExtra("user_name", user_n);
         startActivity(i);
     }
 
@@ -196,6 +207,7 @@ public class Art_details extends AppCompatActivity {
                         am.deleteArt(prod);
                         i.putExtra("inventory_id", inventoryId);
                         i.putExtra("has_perms", perms);
+                        i.putExtra("user_name", user_n);
                         startActivity(i);
                     }
                 })

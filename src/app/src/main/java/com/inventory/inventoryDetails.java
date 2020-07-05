@@ -9,6 +9,7 @@ import android.view.View;
 public class inventoryDetails extends AppCompatActivity {
     boolean perms;
     int id;
+    String user_n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +18,7 @@ public class inventoryDetails extends AppCompatActivity {
         Intent i = getIntent();
         id = i.getIntExtra("inventory_id", 0);
         perms = i.getBooleanExtra("has_perms", true);
+        user_n = i.getStringExtra("user_name");
     }
 
     public void createArt(View v) {
@@ -24,6 +26,7 @@ public class inventoryDetails extends AppCompatActivity {
         //intent.putExtra("user_name", user_n);
         intent.putExtra("inventory_id", id);
         intent.putExtra("has_perms", perms);
+        intent.putExtra("user_name", user_n);
         startActivity(intent);
     }
 
@@ -32,12 +35,14 @@ public class inventoryDetails extends AppCompatActivity {
         //intent.putExtra("user_name", user_n);
         intent.putExtra("inventory_id", id);
         intent.putExtra("has_perms", perms);
+        intent.putExtra("user_name", user_n);
         startActivity(intent);
     }
 
     public void backToInv(View v) {
         Intent intent = new Intent(this, inventoryView.class);
         intent.putExtra("has_perms", perms);
+        intent.putExtra("user_name", user_n);
         startActivity(intent);
     }
 }

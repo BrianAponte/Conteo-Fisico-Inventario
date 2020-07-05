@@ -15,6 +15,7 @@ public class createUser extends AppCompatActivity {
     EditText username_et, password_et,id_et;
     boolean perms;
     long adm_id;
+    String user_n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class createUser extends AppCompatActivity {
         Intent i = getIntent();
         perms = i.getBooleanExtra("has_perms", false);
         adm_id = i.getLongExtra("admin_id", 0);
+        user_n = i.getStringExtra("user_name");
     }
 
     public void addUser_da(View v){
@@ -87,43 +89,63 @@ public class createUser extends AppCompatActivity {
         username_et = (EditText)findViewById(R.id.create_user);
         password_et = (EditText)findViewById(R.id.create_password);
 
-        long newId = Long.parseLong(id_et.getText().toString());
-        String newName = username_et.getText().toString();
-        String newPass = password_et.getText().toString();
-        User newUser = new User(newId, newName, newPass, perms);
-        user_management user_m = user_management.getInstance();
-        TextView error = findViewById(R.id.create_error);
-        TextView success = findViewById(R.id.create_success);
+        if(checkFields()) {
+            long newId = Long.parseLong(id_et.getText().toString());
+            String newName = username_et.getText().toString();
+            String newPass = password_et.getText().toString();
+            User newUser = new User(newId, newName, newPass, perms);
+            user_management user_m = user_management.getInstance();
+            TextView error = findViewById(R.id.create_error);
+            TextView success = findViewById(R.id.create_success);
 
-        if(perms) {
-            User userFound = user_m.findHashMap(newUser);
-            if(userFound==null||userFound.id!=newId) {
-                user_m.addUserHashMap(newUser);
-                error.setVisibility(View.INVISIBLE);
-                success.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
+            if(perms) {
+                User userFound = user_m.findHashMap(newUser);
+                if(userFound==null||userFound.id!=newId) {
+                    user_m.addUserHashMap(newUser);
+                    error.setVisibility(View.INVISIBLE);
+                    success.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    success.setVisibility(View.INVISIBLE);
+                    error.setText("ID de usuario ya registrada");
+                    error.setVisibility(View.VISIBLE);
+                }
             }
             else {
-                success.setVisibility(View.INVISIBLE);
-                error.setVisibility(View.VISIBLE);
+                User admin = user_m.findHashMap(new User(adm_id, "", "", true));
+                User userFound = admin.user_m.findAVL(newUser);
+                if(userFound==null||userFound.id!=newId) {
+                    admin.user_m.addUserAVL(newUser);
+                    error.setVisibility(View.INVISIBLE);
+                    success.setVisibility(View.VISIBLE);
+                    Intent intent = new Intent(this, UserView.class);
+                    intent.putExtra("admin_id", admin.id);
+                    intent.putExtra("user_name", user_n);
+                    startActivity(intent);
+                }
+                else {
+                    success.setVisibility(View.INVISIBLE);
+                    error.setText("ID de usuario ya registrada");
+                    error.setVisibility(View.VISIBLE);
+                }
             }
         }
+    }
+
+    public boolean checkFields() {
+        String user_id = id_et.getText().toString();
+        String user_n = username_et.getText().toString();
+        String password = password_et.getText().toString();
+        TextView error = findViewById(R.id.create_error);
+        if(!user_n.matches("")&&!password.matches("")&&!user_id.matches("")) {
+            return true;
+        }
         else {
-            User admin = user_m.findHashMap(new User(adm_id, "", "", true));
-            User userFound = admin.user_m.findAVL(newUser);
-            if(userFound==null||userFound.id!=newId) {
-                admin.user_m.addUserAVL(newUser);
-                error.setVisibility(View.INVISIBLE);
-                success.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(this, UserView.class);
-                intent.putExtra("admin_id", admin.id);
-                startActivity(intent);
-            }
-            else {
-                success.setVisibility(View.INVISIBLE);
-                error.setVisibility(View.VISIBLE);
-            }
+            error.setText("Rellene todos los campos");
+            error.setVisibility(View.VISIBLE);
+            return false;
         }
     }
 

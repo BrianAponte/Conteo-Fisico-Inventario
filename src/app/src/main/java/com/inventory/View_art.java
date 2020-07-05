@@ -104,6 +104,7 @@ public class View_art extends AppCompatActivity {
                     intent.putExtra("prod_name", product);
                     intent.putExtra("inventory_id", inventoryId);
                     intent.putExtra("has_perms", perms);
+                    intent.putExtra("user_name", user_n);
                     startActivity(intent);
                 }
             });
@@ -115,10 +116,18 @@ public class View_art extends AppCompatActivity {
     }
 
     public void back_view(View v) {
-        Intent i = new Intent(this, inventoryDetails.class);
-        i.putExtra("user_name", user_n);
-        i.putExtra("inventory_id", inventoryId);
-        i.putExtra("has_perms", perms);
-        startActivity(i);
+        if(perms) {
+            Intent i = new Intent(this, inventoryDetails.class);
+            i.putExtra("user_name", user_n);
+            i.putExtra("inventory_id", inventoryId);
+            i.putExtra("has_perms", perms);
+            startActivity(i);
+        }
+        else {
+            Intent i = new Intent(this, inventoryView.class);
+            i.putExtra("user_name", user_n);
+            i.putExtra("has_perms", perms);
+            startActivity(i);
+        }
     }
 }

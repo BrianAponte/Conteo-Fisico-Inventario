@@ -78,6 +78,7 @@ public class UserView extends AppCompatActivity {
                     Intent intent = new Intent(UserView.this, user_details.class);
                     intent.putExtra("user_id", id);
                     intent.putExtra("admin_id", adm_id);
+                    intent.putExtra("user_name", user_n);
                     startActivity(intent);
                 }
             });
@@ -99,6 +100,7 @@ public class UserView extends AppCompatActivity {
         Intent i = new Intent(this, createUser.class);
         i.putExtra("has_perms", false);
         i.putExtra("admin_id", adm_id);
+        i.putExtra("user_name", user_n);
         startActivity(i);
     }
 }

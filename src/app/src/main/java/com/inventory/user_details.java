@@ -14,6 +14,7 @@ public class user_details extends AppCompatActivity {
     long adm_id, user_id;
     user_management um;
     User user;
+    String user_n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class user_details extends AppCompatActivity {
         Intent i = getIntent();
         adm_id = i.getLongExtra("admin_id", 0);
         user_id = i.getLongExtra("user_id", 0);
+        user_n = i.getStringExtra("user_name");
 
         um = user_management.getInstance().findHashMap(new User(adm_id, "", "", true)).user_m;
         user = um.findAVL(new User(user_id, "", "", false));
@@ -134,6 +136,7 @@ public class user_details extends AppCompatActivity {
     public void backToUser(View v) {
         Intent i = new Intent(this, UserView.class);
         i.putExtra("admin_id", adm_id);
+        i.putExtra("user_name", user_n);
         startActivity(i);
     }
 
@@ -150,6 +153,7 @@ public class user_details extends AppCompatActivity {
                         // TODO: handle the OK
                         um.deleteAVL(user);
                         i.putExtra("admin_id", adm_id);
+                        i.putExtra("user_name", user_n);
                         startActivity(i);
                     }
                 })

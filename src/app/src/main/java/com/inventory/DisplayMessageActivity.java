@@ -32,12 +32,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     public void goToInventory(View v){
         Intent intent = new Intent(this, inventoryView.class);
+        intent.putExtra("user_name", user_n);
         startActivity(intent);
     }
 
     public void goToUserM(View v) {
         Intent intent = new Intent(this, UserView.class);
         intent.putExtra("admin_id", adm_id);
+        intent.putExtra("user_name", user_n);
         startActivity(intent);
     }
 
