@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class inventoryDetails extends AppCompatActivity {
+    boolean perms;
     int id;
 
     @Override
@@ -15,12 +16,14 @@ public class inventoryDetails extends AppCompatActivity {
         setContentView(R.layout.activity_inventory_details);
         Intent i = getIntent();
         id = i.getIntExtra("inventory_id", 0);
+        perms = i.getBooleanExtra("has_perms", true);
     }
 
     public void createArt(View v) {
         Intent intent = new Intent(this, Create_art.class);
         //intent.putExtra("user_name", user_n);
         intent.putExtra("inventory_id", id);
+        intent.putExtra("has_perms", perms);
         startActivity(intent);
     }
 
@@ -28,11 +31,13 @@ public class inventoryDetails extends AppCompatActivity {
         Intent intent = new Intent(this, View_art.class);
         //intent.putExtra("user_name", user_n);
         intent.putExtra("inventory_id", id);
+        intent.putExtra("has_perms", perms);
         startActivity(intent);
     }
 
     public void backToInv(View v) {
         Intent intent = new Intent(this, inventoryView.class);
+        intent.putExtra("has_perms", perms);
         startActivity(intent);
     }
 }

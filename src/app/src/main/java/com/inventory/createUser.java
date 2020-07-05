@@ -23,6 +23,7 @@ public class createUser extends AppCompatActivity {
 
         Intent i = getIntent();
         perms = i.getBooleanExtra("has_perms", false);
+        adm_id = i.getLongExtra("admin_id", 0);
     }
 
     public void addUser_da(View v){
@@ -110,15 +111,13 @@ public class createUser extends AppCompatActivity {
         }
         else {
             User admin = user_m.findHashMap(new User(adm_id, "", "", true));
-            user_m = admin.user_m;
-
-            User userFound = user_m.findAVL(newUser);
+            User userFound = admin.user_m.findAVL(newUser);
             if(userFound==null||userFound.id!=newId) {
-                user_m.addUserAVL(newUser);
+                admin.user_m.addUserAVL(newUser);
                 error.setVisibility(View.INVISIBLE);
                 success.setVisibility(View.VISIBLE);
                 Intent intent = new Intent(this, UserView.class);
-                intent.putExtra("admin_id", adm_id);
+                intent.putExtra("admin_id", admin.id);
                 startActivity(intent);
             }
             else {

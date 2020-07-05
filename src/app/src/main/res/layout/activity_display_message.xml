@@ -7,6 +7,22 @@
     tools:context=".DisplayMessageActivity">
 
     <Button
+        android:id="@+id/exit"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#3D5970"
+        android:onClick="logout"
+        android:shadowColor="#FFFFFF"
+        android:text="SALIR"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.499" />
+
+    <Button
         android:id="@+id/view_u_np"
         android:layout_width="190dp"
         android:layout_height="wrap_content"

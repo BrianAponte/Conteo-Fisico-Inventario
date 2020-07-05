@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class inventoryView extends AppCompatActivity {
     String userN;
     inventoryManagement im;
+    boolean perms;
     private static inventoryManagement myInstance = null;
 
     @Override
@@ -19,29 +21,25 @@ public class inventoryView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory_view);
         Intent intent = getIntent();
-
+        perms = intent.getBooleanExtra("has_perms", true);
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
         im = inventoryManagement.getInstance();
         displayInv();
 
-
-        /*for (int i = 0 ; i<inventories.getLen();i++){
-            int id = inventories.get(i).id;
-            TextView tv = new TextView(this);
-            tv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT));
-            tv.setText(String.valueOf(id));
-            tv.setTextSize(20);
-            tv.setClickable(true);
+        ImageView im = (ImageView) findViewById(R.id.add);
+        TextView tv = (TextView) findViewById(R.id.back_display_message);
+        if(!perms) {
+            im.setVisibility(View.INVISIBLE);
+            im.setClickable(false);
+            tv.setBackgroundResource(R.drawable.ic_cerrar_sesion);
             tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(inventoryView.this, View_art.class);
+                    Intent intent = new Intent(inventoryView.this, MainActivity.class);
                     startActivity(intent);
                 }
             });
-            myLayout.addView(tv);
-        }*/
+        }
     }
 
 
@@ -82,6 +80,7 @@ public class inventoryView extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(inventoryView.this, inventoryDetails.class);
                     intent.putExtra("inventory_id", id);
+                    intent.putExtra("has_perms", perms);
                     startActivity(intent);
                 }
             });
@@ -97,5 +96,6 @@ public class inventoryView extends AppCompatActivity {
         i.putExtra("user_name", userN);
         startActivity(i);
     }
+
 }
 

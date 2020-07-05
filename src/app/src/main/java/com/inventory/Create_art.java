@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class Create_art extends AppCompatActivity {
 
     String user_n;
+    boolean perms;
     int inventoryId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class Create_art extends AppCompatActivity {
         Intent intent = getIntent();
         user_n = intent.getStringExtra("user_name");
         inventoryId = intent.getIntExtra("inventory_id", 1);
+        perms = intent.getBooleanExtra("has_perms", true);
     }
 
     public void addProd(View v) {
@@ -82,6 +84,7 @@ public class Create_art extends AppCompatActivity {
         Intent i = new Intent(this, inventoryDetails.class);
         i.putExtra("user_name", user_n);
         i.putExtra("inventory_id", inventoryId);
+        i.putExtra("has_perms", perms);
         startActivity(i);
     }
 

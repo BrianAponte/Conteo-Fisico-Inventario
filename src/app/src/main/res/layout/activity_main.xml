@@ -33,16 +33,47 @@
 
     <!-- __________________________________________________________________________________________________________________________ -->
 
+    <EditText
+        android:id="@+id/admin_id"
+        android:layout_width="230dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:enabled="false"
+        android:hint="Ingrese ID de administrador"
+        android:inputType="number"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textColorLink="#E81123"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/UserId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/login_no_perms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="72dp"
+        android:clickable="true"
+        android:onClick="enableHiddenField"
+        android:text="¿No eres un usuario administrador?"
+        android:textColor="#2B80C3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="80dp"
         android:layout_height="70dp"
-        app:layout_constraintBottom_toTopOf="@+id/UserId"
+        android:layout_marginTop="108dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.516"
         app:srcCompat="@drawable/ic_inventario"
         tools:srcCompat="@drawable/ic_inventario" />
 
@@ -54,11 +85,10 @@
         android:text="Inventory"
         android:textColor="#5B7F9C"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/UserId"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/create_user_tv"
@@ -162,6 +192,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="324dp" />
+        app:layout_constraintGuide_begin="248dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

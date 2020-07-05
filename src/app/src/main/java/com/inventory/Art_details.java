@@ -15,6 +15,7 @@ public class Art_details extends AppCompatActivity {
     Product prod;
     art_management am;
     int inventoryId;
+    boolean perms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +24,7 @@ public class Art_details extends AppCompatActivity {
         Intent i = getIntent();
         prod_name = i.getStringExtra("prod_name");
         inventoryId = i.getIntExtra("inventory_id", 1);
+        perms = i.getBooleanExtra("has_perms", true);
 
         am = inventoryManagement.getInstance().inventarios.get(inventoryId-1).products;
         prod = am.findProd(new Product("", prod_name, "", 0, 0));
@@ -177,6 +179,7 @@ public class Art_details extends AppCompatActivity {
     public void backToArt(View v) {
         Intent i = new Intent(this, View_art.class);
         i.putExtra("inventory_id", inventoryId);
+        i.putExtra("has_perms", perms);
         startActivity(i);
     }
 
@@ -192,6 +195,7 @@ public class Art_details extends AppCompatActivity {
                         // TODO: handle the OK
                         am.deleteArt(prod);
                         i.putExtra("inventory_id", inventoryId);
+                        i.putExtra("has_perms", perms);
                         startActivity(i);
                     }
                 })

@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     TextView create_user_tv;
     D_ArrayImp<User> userList_da;
     String username,password;
+    boolean perms;
 
     public static final String EXTRA_MESSAGE = "com.inventory.MESSAGE";
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         username_et = (EditText)findViewById(R.id.UserId);
         password_et = (EditText)findViewById(R.id.Password);
         //userList_da = new D_ArrayImp<>();
-
+        perms = true;
         user_management um = user_management.getInstance();
         //lena el da
         /*for(long i = 1;i<=100000000;i++){
@@ -173,47 +174,91 @@ public class MainActivity extends AppCompatActivity {
         String password = password_et.getText().toString();
         TextView error = findViewById(R.id.error_text);
 
-
-        if(!user_n.matches("")&&!password.matches("")) {
+        if(checkFields()) {
             long user =  Long.parseLong(username_et.getText().toString());
             user_management user_m = user_management.getInstance();
-            System.out.println(user_m.HashMapUsers);
-            if(user_m.HashMapUsers != 0){
-                User userFound = user_m.findHashMap(new User(user, "", password, false));
-                if(userFound != null) {
-                    if(password.matches(userFound.pass)) {
-                        if(userFound.hasPerms) {
-                            Intent intent = new Intent(this, DisplayMessageActivity.class);
-
-                            intent.putExtra("user_name", userFound.name);
-                            intent.putExtra("admin_id", user);
-                            startActivity(intent);
-                        }
-                        else {
-                            Intent intent = new Intent(this, inventoryView.class);
-                            startActivity(intent);
-                        }
+            User userFound;
+            if(perms) {
+                userFound = user_m.findHashMap(new User(user, "", "", true));
+                if(userFound!=null) {
+                    if(userFound.pass.matches(password)) {
+                        Intent intent = new Intent(this, DisplayMessageActivity.class);
+                        intent.putExtra("user_name", userFound.name);
+                        intent.putExtra("admin_id", user);
+                        startActivity(intent);
                     }
                     else {
-                        error.setText("Contraseña incorrecta" + "  Time: " + (System.nanoTime() - startTime));
+                        error.setText("Contraseña incorrecta");
                         error.setVisibility(View.VISIBLE);
                     }
                 }
                 else {
-                    error.setText("ID de usuario no está registrado" + "  Time: " + (System.nanoTime() - startTime));
+                    error.setText("ID de usuario no está registrado");
                     error.setVisibility(View.VISIBLE);
                 }
             }
             else {
-                error.setText("No existen usuarios HashMap" + "  Time: " + (System.nanoTime() - startTime));
-                error.setVisibility(View.VISIBLE);
+                String admin_id = ((EditText)findViewById(R.id.admin_id)).getText().toString();
+                User adminFound = user_m.findHashMap(new User(Long.parseLong(admin_id), "", "", false));
+                if(adminFound!=null) {
+                    userFound = adminFound.user_m.findAVL(new User(user, "", "", false));
+                    if(userFound!=null&&userFound.id==user) {
+                        if(userFound.pass.matches(password)) {
+                            Intent intent = new Intent(this, inventoryView.class);
+                            intent.putExtra("has_perms", false);
+                            startActivity(intent);
+                        }
+                        else {
+                            error.setText("Contraseña incorrecta");
+                            error.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    else {
+                        error.setText("ID de usuario no está registrado");
+                        error.setVisibility(View.VISIBLE);
+                    }
+                }
+                else {
+                    error.setText("ID de administrador no está registrada");
+                    error.setVisibility(View.VISIBLE);
+                }
             }
         }
-        else {
-            error.setText("Rellene todos los campos" + "  Time: " + (System.nanoTime() - startTime));
-            error.setVisibility(View.VISIBLE);
-        }
+
         time_end = System.nanoTime();
         System.out.println("time to login with avl: " + (time_end-time_start));
+
+
+    }
+
+    public boolean checkFields() {
+        String user_n = username_et.getText().toString();
+        String password = password_et.getText().toString();
+        EditText adm_field = (EditText) findViewById(R.id.admin_id);
+        String adm_id = adm_field.getText().toString();
+        TextView error = findViewById(R.id.error_text);
+        if(!user_n.matches("")&&!password.matches("")) {
+            if(!perms) {
+                if(!adm_id.matches("")) {
+                    return true;
+                }
+                error.setText("Rellene todos los campos");
+                error.setVisibility(View.VISIBLE);
+                return false;
+            }
+            return true;
+        }
+        else {
+            error.setText("Rellene todos los campos");
+            error.setVisibility(View.VISIBLE);
+            return false;
+        }
+    }
+
+    public void enableHiddenField(View v) {
+        EditText adminId = (EditText) findViewById(R.id.admin_id);
+        adminId.setEnabled(true);
+        adminId.setVisibility(View.VISIBLE);
+        perms = false;
     }
 }

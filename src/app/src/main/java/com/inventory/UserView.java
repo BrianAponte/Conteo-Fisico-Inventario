@@ -23,10 +23,9 @@ public class UserView extends AppCompatActivity {
         Intent intent = getIntent();
         adm_id = intent.getLongExtra("admin_id", 0);
         user_n = intent.getStringExtra("user_name");
-
-        um = user_management.getInstance().findHashMap(new User(adm_id, "", "", true)).user_m;
+        User admin = user_management.getInstance().findHashMap(new User(adm_id, "", "", true));
+        um = admin.user_m;
         D_ArrayImp<User> users = um.getInOrderAVL();
-
         displayUsers(users);
     }
 
@@ -92,12 +91,14 @@ public class UserView extends AppCompatActivity {
     public void back_view(View v) {
         Intent i = new Intent(this, DisplayMessageActivity.class);
         i.putExtra("user_name", user_n);
+        i.putExtra("admin_id", adm_id);
         startActivity(i);
     }
 
     public void createU(View v) {
         Intent i = new Intent(this, createUser.class);
         i.putExtra("has_perms", false);
+        i.putExtra("admin_id", adm_id);
         startActivity(i);
     }
 }

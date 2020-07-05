@@ -41,4 +41,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void logout(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
 }

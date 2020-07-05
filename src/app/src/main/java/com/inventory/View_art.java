@@ -14,6 +14,7 @@ public class View_art extends AppCompatActivity {
     String user_n;
     art_management am;
     int inventoryId;
+    boolean perms;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class View_art extends AppCompatActivity {
         Intent intent = getIntent();
         user_n = intent.getStringExtra("user_name");
         inventoryId = intent.getIntExtra("inventory_id", 1);
+        perms = intent.getBooleanExtra("has_perms", true);
 
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.layout);
         am = inventoryManagement.getInstance().inventarios.get(inventoryId-1).products;
@@ -101,6 +103,7 @@ public class View_art extends AppCompatActivity {
                     Intent intent = new Intent(View_art.this, Art_details.class);
                     intent.putExtra("prod_name", product);
                     intent.putExtra("inventory_id", inventoryId);
+                    intent.putExtra("has_perms", perms);
                     startActivity(intent);
                 }
             });
@@ -115,6 +118,7 @@ public class View_art extends AppCompatActivity {
         Intent i = new Intent(this, inventoryDetails.class);
         i.putExtra("user_name", user_n);
         i.putExtra("inventory_id", inventoryId);
+        i.putExtra("has_perms", perms);
         startActivity(i);
     }
 }
