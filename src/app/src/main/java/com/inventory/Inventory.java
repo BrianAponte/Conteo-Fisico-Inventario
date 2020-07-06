@@ -1,18 +1,21 @@
 package com.inventory;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Inventory implements Comparable<Inventory> {
 
     int id;
-    //Date date;
+    String name;
+    Date date;
     art_management products;
     //ArrayList<Product> products;
 
-    public Inventory(int id) {
+    public Inventory(int id, String name) {
         this.id = id;
-        //this.date = date;
+        this.name = name;
+        this.date = Calendar.getInstance().getTime();
         this.products = new art_management();
     }
 

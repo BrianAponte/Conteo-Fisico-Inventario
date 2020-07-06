@@ -1,6 +1,8 @@
 package com.inventory;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,12 +45,16 @@ public class inventoryView extends AppCompatActivity {
         }
     }
 
-
-    public void addInventory(View v) throws Throwable {
+    public void addInventory(String name) {
         LinearLayout myLayout = (LinearLayout) findViewById(R.id.inv_layout);
         myLayout.removeAllViews();
-        im.addInventory();
+        im.addInventory(name);
         displayInv();
+    }
+
+    public void createInventory(View v) throws Throwable {
+        DialogFragment nn = new CreateInventory();
+        nn.show(getSupportFragmentManager(), "Crear Inventario");
     }
 
     public void displayInv(){
@@ -60,7 +66,7 @@ public class inventoryView extends AppCompatActivity {
             row.setOrientation(LinearLayout.HORIZONTAL);
             row.setGravity(View.TEXT_ALIGNMENT_CENTER);
             final int id = inv.get(i).id;
-            final String inv_m = "Inventario "+id;
+            final String inv_m = inv.get(i).id + " " + inv.get(i).name;
             TextView tv = new TextView(this);
             ImageButton im = new ImageButton(this);
             LinearLayout.LayoutParams lay_params =new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,

@@ -2,7 +2,9 @@ package com.inventory;
 
 import android.content.Intent;
 
-public class inventoryManagement {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class inventoryManagement extends AppCompatActivity {
 
     private static inventoryManagement myInstance = null;
     D_ArrayImp<Inventory> inventarios;
@@ -20,8 +22,8 @@ public class inventoryManagement {
         return myInstance;
     }
 
-    public void addInventory() {
+    public void addInventory(String name) {
         amount_of_inventories++;
-        inventarios.add(new Inventory(amount_of_inventories));
+        inventarios.add(new Inventory(amount_of_inventories, name));
     }
 }
