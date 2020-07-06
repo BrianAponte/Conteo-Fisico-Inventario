@@ -13,7 +13,6 @@ import android.widget.TextView;
 public class UserView extends AppCompatActivity {
     long adm_id;
     user_management um;
-    String user_n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +21,6 @@ public class UserView extends AppCompatActivity {
 
         Intent intent = getIntent();
         adm_id = intent.getLongExtra("admin_id", 0);
-        user_n = intent.getStringExtra("user_name");
         User admin = user_management.getInstance().findHashMap(new User(adm_id, "", "", true));
         um = admin.user_m;
         D_ArrayImp<User> users = um.getInOrderAVL();
@@ -78,7 +76,6 @@ public class UserView extends AppCompatActivity {
                     Intent intent = new Intent(UserView.this, user_details.class);
                     intent.putExtra("user_id", id);
                     intent.putExtra("admin_id", adm_id);
-                    intent.putExtra("user_name", user_n);
                     startActivity(intent);
                 }
             });
@@ -91,7 +88,6 @@ public class UserView extends AppCompatActivity {
 
     public void back_view(View v) {
         Intent i = new Intent(this, DisplayMessageActivity.class);
-        i.putExtra("user_name", user_n);
         i.putExtra("admin_id", adm_id);
         startActivity(i);
     }
@@ -100,7 +96,6 @@ public class UserView extends AppCompatActivity {
         Intent i = new Intent(this, createUser.class);
         i.putExtra("has_perms", false);
         i.putExtra("admin_id", adm_id);
-        i.putExtra("user_name", user_n);
         startActivity(i);
     }
 }

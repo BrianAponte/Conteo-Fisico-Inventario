@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 public class Create_art extends AppCompatActivity {
 
-    String user_n;
     boolean perms;
     int inventoryId;
     @Override
@@ -18,7 +17,6 @@ public class Create_art extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_art);
         Intent intent = getIntent();
-        user_n = intent.getStringExtra("user_name");
         inventoryId = intent.getIntExtra("inventory_id", 1);
         perms = intent.getBooleanExtra("has_perms", true);
     }
@@ -82,7 +80,6 @@ public class Create_art extends AppCompatActivity {
 
     public void go_back(View v){
         Intent i = new Intent(this, inventoryDetails.class);
-        i.putExtra("user_name", user_n);
         i.putExtra("inventory_id", inventoryId);
         i.putExtra("has_perms", perms);
         startActivity(i);

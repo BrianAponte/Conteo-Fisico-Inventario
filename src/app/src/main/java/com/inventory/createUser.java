@@ -15,7 +15,6 @@ public class createUser extends AppCompatActivity {
     EditText username_et, password_et,id_et;
     boolean perms;
     long adm_id;
-    String user_n;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,6 @@ public class createUser extends AppCompatActivity {
         Intent i = getIntent();
         perms = i.getBooleanExtra("has_perms", false);
         adm_id = i.getLongExtra("admin_id", 0);
-        user_n = i.getStringExtra("user_name");
     }
 
     public void addUser_da(View v){
@@ -122,7 +120,6 @@ public class createUser extends AppCompatActivity {
                     success.setVisibility(View.VISIBLE);
                     Intent intent = new Intent(this, UserView.class);
                     intent.putExtra("admin_id", admin.id);
-                    intent.putExtra("user_name", user_n);
                     startActivity(intent);
                 }
                 else {

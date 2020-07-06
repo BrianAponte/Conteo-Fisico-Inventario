@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class Art_details extends AppCompatActivity {
-    String prod_name, user_n;
+    String prod_name;
     Product prod;
     art_management am;
     int inventoryId;
@@ -25,7 +25,6 @@ public class Art_details extends AppCompatActivity {
         prod_name = i.getStringExtra("prod_name");
         inventoryId = i.getIntExtra("inventory_id", 1);
         perms = i.getBooleanExtra("has_perms", true);
-        user_n = i.getStringExtra("user_name");
 
         am = inventoryManagement.getInstance().inventarios.get(inventoryId-1).products;
         prod = am.findProd(new Product("", prod_name, "", 0, 0));
@@ -190,7 +189,6 @@ public class Art_details extends AppCompatActivity {
         Intent i = new Intent(this, View_art.class);
         i.putExtra("inventory_id", inventoryId);
         i.putExtra("has_perms", perms);
-        i.putExtra("user_name", user_n);
         startActivity(i);
     }
 
@@ -207,7 +205,6 @@ public class Art_details extends AppCompatActivity {
                         am.deleteArt(prod);
                         i.putExtra("inventory_id", inventoryId);
                         i.putExtra("has_perms", perms);
-                        i.putExtra("user_name", user_n);
                         startActivity(i);
                     }
                 })

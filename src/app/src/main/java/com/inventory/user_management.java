@@ -9,6 +9,7 @@ public class user_management {
     AVLTreeImp<User> user_tree;
     HashMap<Long ,User> user_hashmap;
     int DAUsers, AVLUsers, HashMapUsers;
+    User currentUser;
 
     public user_management(){
         user_list = new D_ArrayImp<>();

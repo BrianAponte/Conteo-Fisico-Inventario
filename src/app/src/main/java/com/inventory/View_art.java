@@ -11,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class View_art extends AppCompatActivity {
-    String user_n;
     art_management am;
     int inventoryId;
     boolean perms;
@@ -21,7 +20,6 @@ public class View_art extends AppCompatActivity {
         setContentView(R.layout.activity_view_art);
 
         Intent intent = getIntent();
-        user_n = intent.getStringExtra("user_name");
         inventoryId = intent.getIntExtra("inventory_id", 1);
         perms = intent.getBooleanExtra("has_perms", true);
 
@@ -104,7 +102,6 @@ public class View_art extends AppCompatActivity {
                     intent.putExtra("prod_name", product);
                     intent.putExtra("inventory_id", inventoryId);
                     intent.putExtra("has_perms", perms);
-                    intent.putExtra("user_name", user_n);
                     startActivity(intent);
                 }
             });
@@ -118,14 +115,12 @@ public class View_art extends AppCompatActivity {
     public void back_view(View v) {
         if(perms) {
             Intent i = new Intent(this, inventoryDetails.class);
-            i.putExtra("user_name", user_n);
             i.putExtra("inventory_id", inventoryId);
             i.putExtra("has_perms", perms);
             startActivity(i);
         }
         else {
             Intent i = new Intent(this, inventoryView.class);
-            i.putExtra("user_name", user_n);
             i.putExtra("has_perms", perms);
             startActivity(i);
         }

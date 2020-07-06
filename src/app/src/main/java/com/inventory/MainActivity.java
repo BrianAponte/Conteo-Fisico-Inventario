@@ -182,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
                 userFound = user_m.findHashMap(new User(user, "", "", true));
                 if(userFound!=null) {
                     if(userFound.pass.matches(password)) {
+                        user_m.currentUser = userFound;
                         Intent intent = new Intent(this, DisplayMessageActivity.class);
-                        intent.putExtra("user_name", userFound.name);
                         intent.putExtra("admin_id", user);
                         startActivity(intent);
                     }
