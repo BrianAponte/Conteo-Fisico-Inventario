@@ -19,7 +19,6 @@ import java.util.Objects;
 import javax.xml.namespace.QName;
 
 public class CreateInventory extends DialogFragment {
-    String userN;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -41,8 +40,6 @@ public class CreateInventory extends DialogFragment {
                             inventoryManagement im;
                             im = inventoryManagement.getInstance();
                             im.addInventory(inventory_name.getText().toString());
-                            Intent i = new Intent(getActivity(), inventoryView.class);
-                            i.putExtra("user_name", true);
                             startActivity(new Intent(getActivity(), inventoryView.class));
                         }
                     }

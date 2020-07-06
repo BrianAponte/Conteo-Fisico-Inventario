@@ -15,6 +15,7 @@ public class createUser extends AppCompatActivity {
     EditText username_et, password_et,id_et;
     boolean perms;
     long adm_id;
+    user_management user_m;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,9 @@ public class createUser extends AppCompatActivity {
 
         Intent i = getIntent();
         perms = i.getBooleanExtra("has_perms", false);
-        adm_id = i.getLongExtra("admin_id", 0);
+        user_m = user_management.getInstance();
+        adm_id = user_m.adminId;
+
     }
 
     public void addUser_da(View v){
@@ -38,7 +41,6 @@ public class createUser extends AppCompatActivity {
         User newUser = new User(newId,newUserN,newPass, perms);
 
 
-        user_management user_m = user_management.getInstance();
         TextView error = findViewById(R.id.create_error);
         TextView success = findViewById(R.id.create_success);
 
@@ -92,7 +94,6 @@ public class createUser extends AppCompatActivity {
             String newName = username_et.getText().toString();
             String newPass = password_et.getText().toString();
             User newUser = new User(newId, newName, newPass, perms);
-            user_management user_m = user_management.getInstance();
             TextView error = findViewById(R.id.create_error);
             TextView success = findViewById(R.id.create_success);
 

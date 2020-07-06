@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                 if(userFound!=null) {
                     if(userFound.pass.matches(password)) {
                         user_m.currentUser = userFound;
+                        user_m.adminId = userFound.id;
                         Intent intent = new Intent(this, DisplayMessageActivity.class);
                         intent.putExtra("admin_id", user);
                         startActivity(intent);
@@ -205,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                     if(userFound!=null&&userFound.id==user) {
                         if(userFound.pass.matches(password)) {
                             user_m.currentUser = userFound;
+                            user_m.adminId = adminFound.id;
                             Intent intent = new Intent(this, inventoryView.class);
                             intent.putExtra("has_perms", false);
                             startActivity(intent);

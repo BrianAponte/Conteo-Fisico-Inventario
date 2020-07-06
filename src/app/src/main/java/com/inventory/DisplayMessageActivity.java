@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 public class DisplayMessageActivity extends AppCompatActivity {
     String user_n;
-    long adm_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +17,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         user_n = user_management.getInstance().currentUser.name;
         //Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        adm_id = intent.getLongExtra("admin_id", 0);
         String message = "¡Bienvenido "+user_n+"!";
         user_management user_m = user_management.getInstance();
         String avl = "Actualmente hay "+user_m.HashMapUsers+" usuarios administradores";
@@ -36,7 +34,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
     public void goToUserM(View v) {
         Intent intent = new Intent(this, UserView.class);
-        intent.putExtra("admin_id", adm_id);
         startActivity(intent);
     }
 

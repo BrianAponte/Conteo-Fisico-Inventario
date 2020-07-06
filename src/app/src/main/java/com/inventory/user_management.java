@@ -10,6 +10,7 @@ public class user_management {
     HashMap<Long ,User> user_hashmap;
     int DAUsers, AVLUsers, HashMapUsers;
     User currentUser;
+    long adminId;
 
     public user_management(){
         user_list = new D_ArrayImp<>();
