@@ -39,6 +39,7 @@ public class inventoryView extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(inventoryView.this, MainActivity.class);
+                    intent.putExtra("user_name", userN);
                     startActivity(intent);
                 }
             });
