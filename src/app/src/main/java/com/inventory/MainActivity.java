@@ -204,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                     userFound = adminFound.user_m.findAVL(new User(user, "", "", false));
                     if(userFound!=null&&userFound.id==user) {
                         if(userFound.pass.matches(password)) {
+                            user_m.currentUser = userFound;
                             Intent intent = new Intent(this, inventoryView.class);
                             intent.putExtra("has_perms", false);
                             startActivity(intent);
