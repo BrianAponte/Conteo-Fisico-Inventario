@@ -1,5 +1,7 @@
 package com.inventory;
+
 class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Comparable<HashNode<K,V>>{
+
   private final K Key;
   private final V Value;
 
@@ -18,13 +20,16 @@ class HashNode<K extends Comparable<K>,V extends Comparable<V>> implements Compa
     return 0;
   }
 
+  /* CONSTRUCTOR */
   public HashNode(final K key, final V value) {
     this.Key = key;
     this.Value = value;
   }
 
+  /* METHODS */
   public K getKey(){return Key;}
   public V getValue(){return Value;}
+
 }
 
 public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
@@ -32,15 +37,17 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
   protected D_ArrayImp<linkedListImp<HashNode<K, V>>> HashTable;
   protected int len;
 
+  /* CONSTRUCTOR */
   public HashMap(int size) {
     HashTable = new D_ArrayImp<>(size);
-    len = 0; // num of data
+    len = 0; // Amount of data
     for(int i = 0;i<size;i++){
       HashTable.add(new linkedListImp<HashNode<K,V>>());
     }
   }
 
-/// Methods
+  /* METHODS */
+
   /**
    * Returns the Table actual capacity.
    * @return capacity.
@@ -56,7 +63,7 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
   {return this.len;}
 
   /**
-   * Adds an element into the HashTable.
+   * Increases size of the table.
    * @return void
    *
    */
@@ -64,41 +71,34 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
     D_ArrayImp<linkedListImp<HashNode<K,V>>> oldTable = HashTable;
     HashTable = new D_ArrayImp<>(HashTable.getSize()*2);
 
-    for(int i = 0; i<HashTable.getSize(); i++){
+    for(int i = 0; i < HashTable.getSize(); i++){
       HashTable.add(new linkedListImp<HashNode<K,V>>());
     }
 
     for (int i = 0; i<oldTable.getSize(); i++){
-
       D_ArrayImp<HashNode<K,V>> hashArray = oldTable.get(i).getAsArray();
-
       for (int j=0;j<hashArray.getLen();j++){
         HashTable.get(hash(hashArray.get(j).getKey())).pushLast(hashArray.get(j));
       }
     }
-
   }
 
+  /**
+   * Adds an element into the map
+   * @param key
+   * @param value
+   * @return void
+   */
   public void add(final K key, final V value) {
 
-    /*
-     *Se hace la segunda verificación porque en caso de que la tabla se haya llenado
-     *perfectamente, el mismo d_array ya haría un r_Up, por lo que se haría 2 veces
-     */
     if(this.HashTable.getSize() == this.len){
       increaseSize();
     }
 
     //m es el hashnode que se piensa añadir
     HashNode<K, V> m = new HashNode<>(key, value);
-    /*
-     *n es el Node de tipo Hashnode(hace uso de m)
-     *que se puede añadir a la linked list,
-     *ya que la ll recibe Node, no HNode
-     */
 
     //Acceso a la HashTable en donde indica la función hash
-
     linkedListImp<HashNode<K,V>> lista = this.HashTable.get(hash(key));
 
     lista.pushLast(m);
@@ -170,12 +170,11 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
       }
       searcher = searcher.next;
     }
-
   }
 
   /**
-   * Type Getter 4 K, if int returns 0, if String returns 1
-   * Protected cuz' no other class needs access to it.
+   * Type Getter for key, if int returns 0, if String returns 1
+   * Protected because no other class needs access to it.
    * @param key
    * @return 0,1
    */
@@ -192,8 +191,7 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
   public int hash(final K key) {
     if(getType(key) == 0){
       //HashInt
-
-      return (int)((Long.parseLong(key.toString())*Long.parseLong("2654435761")% Math.pow(2,32)% this.HashTable.getSize()));
+      return (int)((Long.parseLong(key.toString())*Long.parseLong("2654435761") % Math.pow(2,32)% this.HashTable.getSize()));
 
     }
     //HashString
@@ -201,7 +199,7 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
     return 0;
   }
 
-  public void iter() {
+/*   public void iter() {
     for(int i=0;i<HashTable.getLen();i++) {
       linkedListImp<HashNode<K,V>> current = HashTable.get(i);
       if(!current.isEmpty()) {
@@ -211,7 +209,6 @@ public class HashMap<K extends Comparable<K>, V extends Comparable<V>> {
         System.out.println("Empty: "+i);
       }
     }
-  }
-
+  } */
   ///
 }
